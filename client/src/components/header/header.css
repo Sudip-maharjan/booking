@@ -82,3 +82,18 @@
     color: lightgray;
     cursor: pointer;
 }
+
+
+.date {
+    position: absolute;
+    top: 50px;
+}
+
+.options {
+    position: absolute;
+    top: 50px;
+    background-color: white;
+    color: gray;
+    border-radius: 5px;
+
+}

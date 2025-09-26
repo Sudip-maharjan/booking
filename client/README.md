@@ -1,16 +1,59 @@
-# React + Vite
+# React + Vite Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+###
 
-Currently, two official plugins are available:
+```pwsh
+git add .
+git commit -m "msg"
+git push
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Libraries
 
-## React Compiler
+- [FontAwesome](https://fontawesome.com/)
+- [react-date-range](https://github.com/hypeserver/react-date-range)
+- [date-fns](https://date-fns.org/)
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```pwsh
+npm install --save react-date-range
+npm install --save date-fns
+
+npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/fontawesome-svg-core
+```
+
+## Imports
+
+```jsx
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { DateRange } from "react-date-range";
+```
+
+### Example code
+
+```jsx
+const Example = () => {
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+
+  return (
+    <DateRange
+      editableDateInputs={true}
+      onChange={(item) => setState([item.selection])}
+      moveRangeOnFirstSelection={false}
+      ranges={state}
+    />
+  );
+};
+
+export default Example;
+```
