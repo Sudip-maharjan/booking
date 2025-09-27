@@ -114,6 +114,7 @@ const Header = () => {
                     <button
                       className="optionCounterButton"
                       onClick={() => handleOption("adult", "d")}
+                      disabled={options.adult <= 1} //must have atleast one adult
                     >
                       -
                     </button>
@@ -132,6 +133,7 @@ const Header = () => {
                     <button
                       className="optionCounterButton"
                       onClick={() => handleOption("children", "d")}
+                      disabled={options.children <= 0} //children ca't be negative
                     >
                       -
                     </button>
@@ -152,6 +154,7 @@ const Header = () => {
                     <button
                       className="optionCounterButton"
                       onClick={() => handleOption("room", "d")}
+                      disabled={options.room <= 1} //must have atleast one room selected
                     >
                       -
                     </button>
