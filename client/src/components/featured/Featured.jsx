@@ -12,7 +12,7 @@ const Featured = () => {
           />
           <div className="featuredTitles">
             <h1>Dang</h1>
-            <h1>Sanam ko hotel</h1>
+            <h2>Sanam ko hotel</h2>
           </div>
         </div>
         <div className="featuredItem">
@@ -23,7 +23,7 @@ const Featured = () => {
           />
           <div className="featuredTitles">
             <h1>Dang</h1>
-            <h1>Anish ko Hotel</h1>
+            <h2>Anish ko Hotel</h2>
           </div>
         </div>
         <div className="featuredItem">
@@ -34,7 +34,7 @@ const Featured = () => {
           />
           <div className="featuredTitles">
             <h1>Jhapa</h1>
-            <h1>Babi ko Hotel</h1>
+            <h2>Babi ko Hotel</h2>
           </div>
         </div>
         <div className="featuredItem">
@@ -45,7 +45,7 @@ const Featured = () => {
           />
           <div className="featuredTitles">
             <h1>Kathmandu</h1>
-            <h1>Supreme ko Hotel</h1>
+            <h2>Supreme ko Hotel</h2>
           </div>
         </div>
         <div className="featuredItem">
@@ -56,7 +56,7 @@ const Featured = () => {
           />
           <div className="featuredTitles">
             <h1>Nuwakot</h1>
-            <h1>Kapil ko Hotel</h1>
+            <h2>Kapil ko Hotel</h2>
           </div>
         </div>
       </div>

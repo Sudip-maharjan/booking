@@ -4,6 +4,8 @@
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
+    margin: 0 auto;
     z-index: -1;
 }
 
@@ -13,6 +15,10 @@
     overflow: hidden;
     border-radius: 10px;
     height: 250px;
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .featuredImg {
