@@ -13,6 +13,7 @@ git push
 - [FontAwesome](https://fontawesome.com/)
 - [react-date-range](https://github.com/hypeserver/react-date-range)
 - [date-fns](https://date-fns.org/)
+- [mongoose](https://mongoosejs.com/)
 
 ---
 
