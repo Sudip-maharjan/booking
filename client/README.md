@@ -65,3 +65,4 @@ export default Example;
   Rajak KO DB
   username: Sudip
   pass: P6!TbK3ivmqHivF
+### url: "mongodb+srv://<db_username>:<db_password>@rajankodb.bebnhew.mongodb.net/?retryWrites=true&w=majority&appName=RajanKoDB"
