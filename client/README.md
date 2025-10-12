@@ -14,6 +14,7 @@ git push
 - [react-date-range](https://github.com/hypeserver/react-date-range)
 - [date-fns](https://date-fns.org/)
 - [mongoose](https://mongoosejs.com/)
+  -bcryptjs for password encryption
 
 ---
 
@@ -61,9 +62,10 @@ export default Example;
 
 ### in date-fns mm means minutes and MM means month
 
+# mongodb
 
-# mongodb 
-  Rajak KO DB
-  username: Sudip
-  pass: P6!TbK3ivmqHivF
+Rajak KO DB
+username: Sudip
+pass: P6!TbK3ivmqHivF
+
 ### url: "mongodb+srv://<db_username>:<db_password>@rajankodb.bebnhew.mongodb.net/?retryWrites=true&w=majority&appName=RajanKoDB"
