@@ -1,67 +1,34 @@
+import useFetch from "../../hooks/useFetch";
 import "./featuredProperties.css";
 
 const FeaturedProperties = () => {
+  const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
+
   return (
-    <>
-      <div className="fp">
-        <div className="pfItem">
-          <img
-            src="https://cf.bstatic.com/xdata/images/hotel/square240/508356058.webp?k=0994eed7d0185d5b79c23fe686792a7c34ac83bea75ada07b5b1551a71880503&o="
-            alt=""
-            className="fpImg"
-          />
-          <span className="fpName">Sanam hotel</span>
-          <span className="fpCity">Ghorahi</span>
-          <span className="fpPrice">Starting from $120</span>
-          <div className="fpRating">
-            <button>7.9</button>
-            <span>Excellent</span>
-          </div>
-        </div>
-        <div className="pfItem">
-          <img
-            src="https://cf.bstatic.com/xdata/images/hotel/square240/508356058.webp?k=0994eed7d0185d5b79c23fe686792a7c34ac83bea75ada07b5b1551a71880503&o="
-            alt=""
-            className="fpImg"
-          />
-          <span className="fpName">Sanam hotel</span>
-          <span className="fpCity">Ghorahi</span>
-          <span className="fpPrice">Starting from $120</span>
-          <div className="fpRating">
-            <button>7.9</button>
-            <span>Excellent</span>
-          </div>
-        </div>
-        <div className="pfItem">
-          <img
-            src="https://cf.bstatic.com/xdata/images/hotel/square240/508356058.webp?k=0994eed7d0185d5b79c23fe686792a7c34ac83bea75ada07b5b1551a71880503&o="
-            alt=""
-            className="fpImg"
-          />
-          <span className="fpName">Sanam hotel</span>
-          <span className="fpCity">Ghorahi</span>
-          <span className="fpPrice">Starting from $120</span>
-          <div className="fpRating">
-            <button>7.9</button>
-            <span>Excellent</span>
-          </div>
-        </div>
-        <div className="pfItem">
-          <img
-            src="https://cf.bstatic.com/xdata/images/hotel/square240/508356058.webp?k=0994eed7d0185d5b79c23fe686792a7c34ac83bea75ada07b5b1551a71880503&o="
-            alt=""
-            className="fpImg"
-          />
-          <span className="fpName">Sanam hotel</span>
-          <span className="fpCity">Ghorahi</span>
-          <span className="fpPrice">Starting from $120</span>
-          <div className="fpRating">
-            <button>7.9</button>
-            <span>Excellent</span>
-          </div>
-        </div>
-      </div>
-    </>
+    <div className="fp">
+      {loading ? (
+        "Loading"
+      ) : (
+        <>
+          {data.map((item) => (
+            <div className="fpItem" key={item._id}>
+              <img src={item.photos[0]} alt="" className="fpImg" />
+              <span className="fpName">{item.name}</span>
+              <span className="fpCity">{item.city}</span>
+              <span className="fpPrice">
+                Starting from ${item.cheapestPrice}
+              </span>
+              {item.rating && (
+                <div className="fpRating">
+                  <button>{item.rating}</button>
+                  <span>Excellent</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </>
+      )}
+    </div>
   );
 };
 

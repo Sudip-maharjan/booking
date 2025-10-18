@@ -1,5 +1,9 @@
 # React + Vite Setup
 
+##.env
+MONGO = mongodb+srv://Sudip:P6!TbK3ivmqHivF@rajankodb.bebnhew.mongodb.net/booking?retryWrites=true&w=majority&appName=RajanKoDB
+JWT = Sw3UEPh0/lDCttqLlfQUJKSzIXUHLaqLNyTVhSeY8kY=
+
 ###
 
 ```pwsh

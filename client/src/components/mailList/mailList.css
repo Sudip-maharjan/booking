@@ -12,7 +12,7 @@
 
 .mailInputContainer>input {
     width: 300px;
-    height: 50px;
+    height: 30px;
     padding: 10px;
     border: none;
     margin-right: 10px;
@@ -27,27 +27,4 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 70px;
-}
-
-@media (max-width: 600px) {
-    .mailInputContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .mailInputContainer>input {
-        width: 80%;
-        margin: 0 0 10px 0;
-    }
-
-    .mailInputContainer>button {
-        width: 80%;
-    }
-}
-
-.mailInputContainer>input:focus {
-    outline: 2px solid #0071c2;
 }

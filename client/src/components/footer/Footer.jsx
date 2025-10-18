@@ -45,7 +45,7 @@ const Footer = () => {
           <li className="fListItem">Hotels</li>
         </ul>
       </div>
-      <div className="fText">Copyright c 2025</div>
+      <div className="fText">Copyright © 2025</div>
     </div>
   );
 };
