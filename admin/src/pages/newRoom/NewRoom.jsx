@@ -6,11 +6,14 @@ import { useState } from "react";
 import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NewRoom = () => {
   const [info, setInfo] = useState({});
   const [hotelId, setHotelId] = useState(undefined);
   const [rooms, setRooms] = useState([]);
+
+  const navigate = useNavigate();
 
   const { data, loading, error } = useFetch("/api/hotels");
 
@@ -20,11 +23,30 @@ const NewRoom = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if (!rooms) {
+      alert("Please enter room numbers.");
+      return;
+    }
+
+    if (!hotelId) {
+      alert("Please select a hotel first.");
+      return;
+    }
+
     const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      await axios.post(`/api/rooms/${hotelId}`, { ...info, roomNumbers });
+      const resR = await axios.post(`/api/rooms/${hotelId}`, {
+        ...info,
+        roomNumbers,
+      });
+      if (resR.status === 200) {
+        alert("Room created successfully!");
+        navigate("/rooms");
+      }
     } catch (err) {
       console.log(err);
+      alert("Failed to create room. Check console for details");
     }
   };
 
@@ -62,8 +84,11 @@ const NewRoom = () => {
                 <label>Choose a hotel</label>
                 <select
                   id="hotelId"
+                  value={hotelId || ""}
                   onChange={(e) => setHotelId(e.target.value)}
+                  required
                 >
+                  <option value="">-- Select a hotel --</option>
                   {loading
                     ? "loading"
                     : data &&

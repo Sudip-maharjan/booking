@@ -13,7 +13,7 @@ export const createRoom = async (req, res, next) => {
         $push: { rooms: savedRoom._id },
       });
     } catch (err) {
-      next(err);
+      return next(err);
     }
     res.status(200).json(savedRoom);
   } catch (err) {
