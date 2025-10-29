@@ -1,4 +1,65 @@
-# React + Vite Setup
+# Client
+
+Project Tree:
+client
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── public/
+├── README.md
+├── src/
+│ ├── App.jsx
+│ ├── components/
+│ │ ├── featured/
+│ │ │ ├── featured.css
+│ │ │ └── Featured.jsx
+│ │ ├── featuredProperties/
+│ │ │ ├── featuredProperties.css
+│ │ │ └── FeaturedProperties.jsx
+│ │ ├── footer/
+│ │ │ ├── footer.css
+│ │ │ └── Footer.jsx
+│ │ ├── header/
+│ │ │ ├── header.css
+│ │ │ └── Header.jsx
+│ │ ├── mailList/
+│ │ │ ├── mailList.css
+│ │ │ └── MailList.jsx
+│ │ ├── navbar/
+│ │ │ ├── navbar.css
+│ │ │ └── Navbar.jsx
+│ │ ├── propertyList/
+│ │ │ ├── propertyList.css
+│ │ │ └── PropertyList.jsx
+│ │ ├── reserve/
+│ │ │ ├── reserve.css
+│ │ │ └── Reserve.jsx
+│ │ └── searchItem/
+│ │ ├── searchItem.css
+│ │ └── SearchItem.jsx
+│ ├── context/
+│ │ ├── AuthContext.jsx
+│ │ └── SearchContext.jsx
+│ ├── hooks/
+│ │ └── useFetch.js
+│ ├── index.css
+│ ├── main.jsx
+│ └── pages/
+│ ├── Home/
+│ │ ├── home.css
+│ │ └── Home.jsx
+│ ├── hotel/
+│ │ ├── hotel.css
+│ │ └── Hotel.jsx
+│ ├── list/
+│ │ ├── list.css
+│ │ └── List.jsx
+│ └── login/
+│ ├── Login.css
+│ └── Login.jsx
+├── vite.config.js
+└── yarn.lock
 
 ##.env
 MONGO = mongodb+srv://Sudip:P6!TbK3ivmqHivF@rajankodb.bebnhew.mongodb.net/booking?retryWrites=true&w=majority&appName=RajanKoDB
