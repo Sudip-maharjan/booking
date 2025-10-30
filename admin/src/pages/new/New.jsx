@@ -17,6 +17,7 @@ const New = ({ inputs, title }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "upload");
@@ -34,7 +35,7 @@ const New = ({ inputs, title }) => {
       };
 
       await axios.post("/api/auth/register", newUser);
-      alert("✅ User has been registered successfully!");
+      alert("User has been registered successfully!");
 
       navigate("/users");
     } catch (err) {

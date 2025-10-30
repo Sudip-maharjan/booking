@@ -38,24 +38,24 @@ const NewHotel = () => {
 
     for (const input of hotelInputs) {
       if (!info[input.id]) {
-        alert(`⚠️ Please enter ${input.label}.`);
+        alert(` Please enter ${input.label}.`);
         return;
       }
     }
 
     if (info.cheapestPrice && info.cheapestPrice <= 0) {
-      alert("⚠️ Price must be greater than 0.");
+      alert(" Price must be greater than 0.");
       return;
     }
 
     if (info.name && info.name.length < 3) {
-      alert("⚠️ Name must be at least 3 characters long.");
+      alert(" Name must be at least 3 characters long.");
       return;
     }
 
     const allowedTypes = ["hotel", "apartment", "resort", "villa", "cabin"];
     if (info.type && !allowedTypes.includes(info.type.toLowerCase())) {
-      alert("⚠️ Invalid hotel type.");
+      alert(" Invalid hotel type.");
       return;
     }
 

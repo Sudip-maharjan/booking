@@ -4,7 +4,7 @@ import { createError } from "../utils/error.js";
 
 export const createRoom = async (req, res, next) => {
   const hotelId = req.params.hotelid;
-  const newRoom = new Room(req.body);
+  const newRoom = new Room({ ...req.body, hotelId });
 
   try {
     const savedRoom = await newRoom.save();
@@ -43,23 +43,23 @@ export const updateRoomAvailability = async (req, res, next) => {
         },
       }
     );
-    res.status(200).json("Room status has been updated.");
+    return res.status(200).json("Room status has been updated.");
   } catch (err) {
     next(err);
   }
 };
 export const deleteRoom = async (req, res, next) => {
+  const roomId = req.params.id;
   const hotelId = req.params.hotelid;
+
   try {
-    await Room.findByIdAndDelete(req.params.id);
-    try {
-      await Hotel.findByIdAndUpdate(hotelId, {
-        $pull: { rooms: req.params.id },
-      });
-    } catch (err) {
-      next(err);
+    await Room.findByIdAndDelete(roomId);
+
+    if (hotelId) {
+      await Hotel.findByIdAndUpdate(hotelId, { $pull: { rooms: roomId } });
     }
-    res.status(200).json("Room has been deleted.");
+
+    res.status(200).json("Room deleted successfully");
   } catch (err) {
     next(err);
   }
@@ -74,7 +74,7 @@ export const getRoom = async (req, res, next) => {
 };
 export const getRooms = async (req, res, next) => {
   try {
-    const rooms = await Room.find();
+    const rooms = await Room.find().populate("hotelId", "_id name");
     res.status(200).json(rooms);
   } catch (err) {
     next(err);

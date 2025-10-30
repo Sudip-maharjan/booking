@@ -34,7 +34,9 @@ const NewRoom = () => {
       return;
     }
 
-    const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
+    const roomNumbers = rooms
+      .split(",")
+      .map((room) => ({ number: Number(room.trim()) }));
     try {
       const resR = await axios.post(`/api/rooms/${hotelId}`, {
         ...info,

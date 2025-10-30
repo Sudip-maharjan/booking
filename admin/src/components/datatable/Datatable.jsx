@@ -15,9 +15,14 @@ const Datatable = ({ columns }) => {
     setList(data);
   }, [data]);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, hotelId) => {
     try {
-      await axios.delete(`/api/${path}/${id}`);
+      if (path === "rooms") {
+        console.log("Deleting room", { id, hotelId });
+        await axios.delete(`/api/rooms/${id}/${hotelId}`);
+      } else {
+        await axios.delete(`/api/${path}/${id}`);
+      }
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };
@@ -35,7 +40,9 @@ const Datatable = ({ columns }) => {
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() =>
+                handleDelete(params.row._id, params.row.hotelId._id)
+              }
             >
               Delete
             </div>
