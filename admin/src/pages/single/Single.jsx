@@ -74,14 +74,6 @@ const Single = () => {
             <Chart aspect={3 / 1} title="Activity (Last 6 Months)" />
           </div>
         </div>
-
-        {/* Only show transactions table for users */}
-        {path === "users" && (
-          <div className="bottom">
-            <h1 className="title">Last Transactions</h1>
-            <List userId={id} />
-          </div>
-        )}
       </div>
     </div>
   );
