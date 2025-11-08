@@ -15,10 +15,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="wrapper">
-        <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlinedIcon />
-        </div>
+        <div></div>
         <div className="items">
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
@@ -29,20 +26,6 @@ const Navbar = () => {
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
             />
-          </div>
-          <div className="item">
-            <FullscreenExitOutlinedIcon className="icon" />
-          </div>
-          <div className="item">
-            <NotificationsNoneOutlinedIcon className="icon" />
-            <div className="counter">1</div>
-          </div>
-          <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon" />
-            <div className="counter">2</div>
-          </div>
-          <div className="item">
-            <ListOutlinedIcon className="icon" />
           </div>
           <div className="item">
             <img

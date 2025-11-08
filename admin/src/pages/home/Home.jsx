@@ -5,18 +5,22 @@ import Widget from "../../components/widget/Widget";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
 import Featured from "../../components/featured/featured";
+import useFetch from "../../hooks/useFetch";
 
 const Home = () => {
+  const { data: users } = useFetch("api/users");
+  const { data: hotels } = useFetch("/api/hotels");
+  const { data: rooms } = useFetch("/api/rooms");
+
   return (
     <div className="home">
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+          <Widget type="user" count={users.length} />
+          <Widget type="hotel" count={hotels.length} />
+          <Widget type="room" count={rooms.length} />
         </div>
         <div className="charts">
           <Featured />
