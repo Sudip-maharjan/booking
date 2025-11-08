@@ -12,6 +12,7 @@ import { AuthContext } from "./context/AuthContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import BookingsList from "./pages/bookingsList/BookingsList";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -119,6 +120,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          {/* BOOKINGS */}
+          <Route
+            path="/bookings"
+            element={
+              <ProtectedRoute>
+                <BookingsList />
+              </ProtectedRoute>
+            }
+          ></Route>
 
           {/* FALLBACK */}
           <Route path="*" element={<Navigate to="/" replace />} />

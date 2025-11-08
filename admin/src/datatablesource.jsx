@@ -87,3 +87,80 @@ export const roomColumns = [
     width: 100,
   },
 ];
+
+export const bookingColumns = [
+  { field: "_id", headerName: "ID", width: 220 },
+  {
+    field: "user",
+    headerName: "User",
+    width: 150,
+    renderCell: (params) => {
+      return params.row.user?.username || "N/A";
+    },
+  },
+  {
+    field: "hotel",
+    headerName: "Hotel",
+    width: 200,
+    renderCell: (params) => {
+      return params.row.hotel?.name || "N/A";
+    },
+  },
+  {
+    field: "checkInDate",
+    headerName: "Check In",
+    width: 120,
+    renderCell: (params) => {
+      return new Date(params.row.checkInDate).toLocaleDateString();
+    },
+  },
+  {
+    field: "checkOutDate",
+    headerName: "Check Out",
+    width: 120,
+    renderCell: (params) => {
+      return new Date(params.row.checkOutDate).toLocaleDateString();
+    },
+  },
+  {
+    field: "totalPrice",
+    headerName: "Total Price",
+    width: 120,
+    renderCell: (params) => {
+      return `$${params.row.totalPrice}`;
+    },
+  },
+  {
+    field: "guests",
+    headerName: "Guests",
+    width: 80,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 120,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.status}`}>
+          {params.row.status}
+        </div>
+      );
+    },
+  },
+  {
+    field: "isPaid",
+    headerName: "Payment",
+    width: 100,
+    renderCell: (params) => {
+      return (
+        <div
+          className={`cellWithStatus ${
+            params.row.isPaid ? "confirmed" : "pending"
+          }`}
+        >
+          {params.row.isPaid ? "Paid" : "Unpaid"}
+        </div>
+      );
+    },
+  },
+];
