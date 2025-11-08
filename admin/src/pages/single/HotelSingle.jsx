@@ -1,7 +1,7 @@
 import "./HotelSingle.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 
@@ -52,7 +52,7 @@ const HotelSingle = () => {
   const images =
     data.photos && data.photos.length > 0
       ? data.photos
-      : ["https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg"];
+      : ["https://i.ibb.co/MBtjqXQ/no-avatar.gif"];
   const imageSrc = images[currentImageIndex];
 
   const handleNextImage = () => {
@@ -103,6 +103,12 @@ const HotelSingle = () => {
               <h1 className="pageTitle">{displayTitle}</h1>
               <p className="pageSubtitle">View and manage hotel information</p>
             </div>
+            <Link to={`/hotels/edit/${id}`} style={{ textDecoration: "none" }}>
+              <button className="editButton">
+                <EditIcon />
+                <span>Edit</span>
+              </button>
+            </Link>
           </div>
 
           {/* Main Content Card */}

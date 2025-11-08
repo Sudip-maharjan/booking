@@ -57,20 +57,28 @@
         }
       }
 
-      .editButton {
-        padding: 10px 20px;
-        background: #7451f8;
-        color: #fff;
-        border-radius: 8px;
-        border: none;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
+      
 
-        &:hover {
-          background: #5e3dd8;
-        }
-      }
+  .editButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+    }
+  }
+
     }
 
     // Details Card

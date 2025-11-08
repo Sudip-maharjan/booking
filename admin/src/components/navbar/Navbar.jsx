@@ -9,9 +9,9 @@ import useFetch from "../../hooks/useFetch";
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const { id } = useParams();
-  const { data, loading, error } = useFetch(`/api/users/${id}`);
-  const imageSrc = data.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
-  const title = data.username;
+  const user = JSON.parse(localStorage.getItem("user"));
+  const imageSrc = user.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
+  const title = user.username;
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -29,7 +29,7 @@ const Navbar = () => {
           </div>
           <div className="item">
             <img src={imageSrc} alt="" className="avatar" />
-            {title}
+            <div>{title}</div>
           </div>
         </div>
       </div>

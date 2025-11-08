@@ -1,8 +1,9 @@
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import EditIcon from "@mui/icons-material/Edit";
 
 const Single = () => {
   const { id } = useParams();
@@ -80,6 +81,12 @@ const Single = () => {
               <h1 className="pageTitle">{displayTitle}</h1>
               <p className="pageSubtitle">View and manage user information</p>
             </div>
+            <Link to={`/users/edit/${id}`} style={{ textDecoration: "none" }}>
+              <button className="editButton">
+                <EditIcon />
+                <span>Edit</span>
+              </button>
+            </Link>
           </div>
 
           {/* Main Content Card */}

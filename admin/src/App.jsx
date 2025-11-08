@@ -15,6 +15,9 @@ import NewRoom from "./pages/newRoom/NewRoom";
 import BookingsList from "./pages/bookingsList/BookingsList";
 import RoomSingle from "./pages/single/RoomSingle";
 import HotelSingle from "./pages/single/HotelSingle";
+import EditHotel from "./pages/edit/EditHotel";
+import EditUser from "./pages/edit/EditUser";
+import EditRoom from "./pages/edit/EditRoom";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -70,6 +73,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/users/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditUser />
+              </ProtectedRoute>
+            }
+          />
 
           {/* HOTELS */}
           <Route
@@ -96,6 +107,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/hotels/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditHotel />
+              </ProtectedRoute>
+            }
+          />
 
           {/* ROOMS */}
           <Route
@@ -119,6 +138,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <NewRoom />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/rooms/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditRoom />
               </ProtectedRoute>
             }
           />

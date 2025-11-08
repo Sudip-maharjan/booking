@@ -1,8 +1,9 @@
 import "../single/single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import EditIcon from "@mui/icons-material/Edit";
 
 const RoomSingle = () => {
   const { id } = useParams();
@@ -102,6 +103,12 @@ const RoomSingle = () => {
               <h1 className="pageTitle">{displayTitle}</h1>
               <p className="pageSubtitle">View and manage room information</p>
             </div>
+            <Link to={`/rooms/edit/${id}`} style={{ textDecoration: "none" }}>
+              <button className="editButton">
+                <EditIcon />
+                <span>Edit</span>
+              </button>
+            </Link>
           </div>
 
           {/* Main Card */}
