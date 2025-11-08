@@ -1,12 +1,13 @@
 .widget {
   display: flex;
   justify-content: space-between;
+  background-color: white;
   flex: 1;
-  padding: 10px;
+  padding: 15px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(219, 195, 195, 0.47);
   border-radius: 10px;
-  height: 100px;
+  height: 130px;
 
   .left,
   .right {
@@ -16,18 +17,19 @@
 
     .title {
       font-weight: bold;
-      font-size: 14px;
+      font-size: 17px;
       color: rgb(160, 160, 160);
     }
 
     .counter {
       font-size: 28px;
-      font-weight: 300;
+      font-weight: 500;
+      
     }
 
     .link {
       width: max-content;
-      font-size: 12px;
+      font-size: 17px;
       border-bottom: 1px solid gray;
     }
 
@@ -45,7 +47,7 @@
     }
 
     .icon {
-      font-size: 18px;
+      font-size: 35px;
       padding: 5px;
       border-radius: 5px;
       align-self: flex-end;

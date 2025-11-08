@@ -8,10 +8,14 @@ import {
   getUserBookings,
   updateBookingStatus,
   updatePaymentStatus,
+  getRevenueStats,
 } from "../controllers/booking.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
 const router = express.Router();
+
+// revenue
+router.get("/revenue-stats", verifyAdmin, getRevenueStats);
 
 // CREATE - User must be authenticated
 router.post("/", verifyToken, createBooking);
