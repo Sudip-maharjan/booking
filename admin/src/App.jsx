@@ -13,6 +13,8 @@ import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
 import BookingsList from "./pages/bookingsList/BookingsList";
+import RoomSingle from "./pages/single/RoomSingle";
+import HotelSingle from "./pages/single/HotelSingle";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -82,7 +84,7 @@ function App() {
             path="/hotels/:id"
             element={
               <ProtectedRoute>
-                <Single />
+                <HotelSingle />
               </ProtectedRoute>
             }
           />
@@ -108,7 +110,7 @@ function App() {
             path="/rooms/:id"
             element={
               <ProtectedRoute>
-                <Single />
+                <RoomSingle />
               </ProtectedRoute>
             }
           />

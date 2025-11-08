@@ -22,11 +22,21 @@
         flex: 1;
         text-align: center;
 
-        img {
-          width: 100px;
+        /* ✅ now supports multiple images */
+        .imagePreviewContainer {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: center;
+          padding: 10px;
+        }
+
+        .previewImage {
+          width: 120px;
           height: 100px;
-          border-radius: 50%;
           object-fit: cover;
+          border-radius: 8px;
+          border: 1px solid #ccc;
         }
       }
 
@@ -40,12 +50,14 @@
           gap: 30px;
           justify-content: space-between;
 
-          .selectRooms{
+          .selectRooms {
             width: 100%;
 
-            select{
+            select {
               width: 100%;
               padding: 10px;
+              border-radius: 5px;
+              border: 1px solid #ccc;
             }
           }
 
@@ -79,6 +91,7 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
+            border-radius: 5px;
           }
         }
       }

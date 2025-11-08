@@ -1,12 +1,19 @@
-import "./single.scss";
+import "../single/single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
-const Single = () => {
+const RoomSingle = () => {
   const { id } = useParams();
-  const { data, loading, error } = useFetch(`/api/users/${id}`);
+
+  // ✅ Fetch room
+  const { data, loading, error } = useFetch(`/api/rooms/${id}`);
+
+  // ✅ Fetch hotel name when room hotelId becomes available
+  const { data: hotelData } = useFetch(
+    data?.hotelId ? `/api/hotels/find/${data.hotelId}` : null
+  );
 
   if (loading) {
     return (
@@ -16,7 +23,7 @@ const Single = () => {
           <Navbar />
           <div className="loadingState">
             <div className="spinner"></div>
-            <p>Loading user details...</p>
+            <p>Loading room details...</p>
           </div>
         </div>
       </div>
@@ -32,35 +39,50 @@ const Single = () => {
           <div className="errorState">
             <div className="errorIcon">⚠️</div>
             <h2>Error Loading Data</h2>
-            <p>Unable to fetch user information. Please try again.</p>
+            <p>Unable to fetch room information. Please try again.</p>
           </div>
         </div>
       </div>
     );
   }
 
-  const hiddenKeys = ["_id", "__v", "password", "updatedAt", "img"];
+  // Hide internal fields
+  const hiddenKeys = ["_id", "__v", "updatedAt"];
 
+  // ✅ Format display name
   const formatKey = (key) => {
+    if (key === "roomNumbers") return "Room Numbers";
+    if (key === "hotelId") return "Hotel";
+
     return key
       .replace(/([A-Z])/g, " $1")
       .replace(/^./, (str) => str.toUpperCase())
       .trim();
   };
 
-  const formatValue = (value) => {
+  // ✅ Custom value formatting
+  const formatValue = (value, key) => {
     if (value === null || value === undefined) return "N/A";
-    if (typeof value === "boolean") return value ? "Yes" : "No";
-    if (typeof value === "object") {
-      if (Array.isArray(value)) return value.join(", ");
-      return JSON.stringify(value, null, 2);
+
+    // ✅ Show hotel name instead of ID
+    if (key === "hotelId") {
+      return hotelData?.name || "Loading...";
     }
+
+    // ✅ Format roomNumbers array
+    if (key === "roomNumbers") {
+      return value.map((room) => room.number).join(", ");
+    }
+
+    if (typeof value === "boolean") return value ? "Yes" : "No";
     if (typeof value === "number") return value.toLocaleString();
+
+    if (typeof value === "object") return JSON.stringify(value, null, 2);
+
     return value.toString();
   };
 
-  const imageSrc = data.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
-  const displayTitle = data.username || "User Details";
+  const displayTitle = data.title || "Room Details";
 
   return (
     <div className="single">
@@ -73,30 +95,17 @@ const Single = () => {
           <div className="pageHeader">
             <div className="headerContent">
               <div className="breadcrumb">
-                <span className="breadcrumbItem">users</span>
+                <span className="breadcrumbItem">rooms</span>
                 <span className="breadcrumbSeparator">/</span>
                 <span className="breadcrumbItem active">{displayTitle}</span>
               </div>
               <h1 className="pageTitle">{displayTitle}</h1>
-              <p className="pageSubtitle">View and manage user information</p>
+              <p className="pageSubtitle">View and manage room information</p>
             </div>
           </div>
 
-          {/* Main Content Card */}
+          {/* Main Card */}
           <div className="detailsCard">
-            <div className="cardHeader">
-              <div className="imageWrapper">
-                <img
-                  src={imageSrc}
-                  alt={displayTitle}
-                  className="entityImage"
-                />
-                <div className="imageOverlay">
-                  <span className="entityBadge">user</span>
-                </div>
-              </div>
-            </div>
-
             <div className="cardBody">
               <div className="infoGrid">
                 {Object.entries(data)
@@ -104,7 +113,7 @@ const Single = () => {
                   .map(([key, value]) => (
                     <div className="infoItem" key={key}>
                       <div className="infoLabel">{formatKey(key)}</div>
-                      <div className="infoValue">{formatValue(value)}</div>
+                      <div className="infoValue">{formatValue(value, key)}</div>
                     </div>
                   ))}
               </div>
@@ -116,4 +125,4 @@ const Single = () => {
   );
 };
 
-export default Single;
+export default RoomSingle;

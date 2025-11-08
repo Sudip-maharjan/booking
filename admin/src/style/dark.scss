@@ -35,7 +35,9 @@
     hr {
       border-color: #333;
     }
-
+    .widget{
+      background-color: #111;
+    }
     ul {
       li {
         &:hover {
@@ -50,7 +52,11 @@
   }
 
   .datatable {
+    .datatableTitle{
+      background-color: #111;
+    }
     .datagrid {
+      background-color: #111;
       color: gray;
       border: none;
 

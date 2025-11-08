@@ -2,7 +2,6 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
 
   .homeContainer {
     flex: 6;
@@ -37,7 +36,6 @@
       }
 
       .chartCard {
-        background: white;
         border-radius: 16px;
         padding: 24px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -69,7 +67,6 @@
     }
 
     .listContainer {
-      background: white;
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       overflow: hidden;

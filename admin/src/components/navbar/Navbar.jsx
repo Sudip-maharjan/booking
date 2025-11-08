@@ -1,17 +1,17 @@
 import "./navbar.scss";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
-
+  const { id } = useParams();
+  const { data, loading, error } = useFetch(`/api/users/${id}`);
+  const imageSrc = data.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
+  const title = data.username;
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -28,11 +28,8 @@ const Navbar = () => {
             />
           </div>
           <div className="item">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="avatar"
-            />
+            <img src={imageSrc} alt="" className="avatar" />
+            {title}
           </div>
         </div>
       </div>

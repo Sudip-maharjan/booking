@@ -1,7 +1,6 @@
 .widget {
   display: flex;
   justify-content: space-between;
-  background-color: white;
   flex: 1;
   padding: 15px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
@@ -33,18 +32,6 @@
       border-bottom: 1px solid gray;
     }
 
-    .percentage {
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-
-      &.positive {
-        color: green;
-      }
-      &.negative {
-        color: red;
-      }
-    }
 
     .icon {
       font-size: 35px;

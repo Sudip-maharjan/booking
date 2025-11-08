@@ -6,9 +6,10 @@ import { useState } from "react";
 import { hotelInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const NewHotel = () => {
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState([]);
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
 
@@ -26,8 +27,6 @@ const NewHotel = () => {
     setRooms(value);
   };
 
-  console.log(files);
-
   const handleClick = async (e) => {
     e.preventDefault();
 
@@ -38,24 +37,24 @@ const NewHotel = () => {
 
     for (const input of hotelInputs) {
       if (!info[input.id]) {
-        alert(` Please enter ${input.label}.`);
+        alert(`Please enter ${input.label}.`);
         return;
       }
     }
 
     if (info.cheapestPrice && info.cheapestPrice <= 0) {
-      alert(" Price must be greater than 0.");
+      alert("Price must be greater than 0.");
       return;
     }
 
     if (info.name && info.name.length < 3) {
-      alert(" Name must be at least 3 characters long.");
+      alert("Name must be at least 3 characters long.");
       return;
     }
 
     const allowedTypes = ["hotel", "apartment", "resort", "villa", "cabin"];
     if (info.type && !allowedTypes.includes(info.type.toLowerCase())) {
-      alert(" Invalid hotel type.");
+      alert("Invalid hotel type.");
       return;
     }
 
@@ -69,7 +68,6 @@ const NewHotel = () => {
             "https://api.cloudinary.com/v1_1/dkrokzmvp/image/upload",
             data
           );
-
           const { url } = uploadRes.data;
           return url;
         })
@@ -82,34 +80,49 @@ const NewHotel = () => {
       };
 
       await axios.post("/api/hotels", newhotel);
+      alert("Hotel added successfully!");
+      Navigate("/users");
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Add New Product</h1>
+          <h1>Add New Hotel</h1>
         </div>
         <div className="bottom">
           <div className="left">
-            <img
-              src={
-                files
-                  ? URL.createObjectURL(files[0])
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
+            {/* ✅ Show all selected images */}
+            <div className="imagePreviewContainer">
+              {files && files.length > 0 ? (
+                Array.from(files).map((file, index) => (
+                  <img
+                    key={index}
+                    src={URL.createObjectURL(file)}
+                    alt={`preview-${index}`}
+                    className="previewImage"
+                  />
+                ))
+              ) : (
+                <img
+                  src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  alt="no preview"
+                  className="previewImage"
+                />
+              )}
+            </div>
           </div>
+
           <div className="right">
             <form>
               <div className="formInput">
                 <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                  Images: <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
                 <input
                   type="file"
@@ -131,6 +144,7 @@ const NewHotel = () => {
                   />
                 </div>
               ))}
+
               <div className="formInput">
                 <label>Featured</label>
                 <select id="featured" onChange={handleChange}>
@@ -138,6 +152,7 @@ const NewHotel = () => {
                   <option value={true}>Yes</option>
                 </select>
               </div>
+
               <div className="selectRooms">
                 <label>Rooms</label>
                 <select id="rooms" multiple onChange={handleSelect}>
@@ -151,6 +166,7 @@ const NewHotel = () => {
                       ))}
                 </select>
               </div>
+
               <button onClick={handleClick}>Send</button>
             </form>
           </div>

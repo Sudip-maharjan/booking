@@ -6,12 +6,19 @@ import StoreIcon from "@mui/icons-material/Store";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 
 const Sidebar = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const { dispatch } = useContext(DarkModeContext);
+  const nav = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    nav("/login");
+  };
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -55,13 +62,21 @@ const Sidebar = () => {
             </li>
           </Link>
           <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
+
+          <Link to={`/users/${user._id}`}>
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Profile</span>
+            </li>
+          </Link>
+
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <span>
+              <div className="logoutBtn" onClick={handleLogout}>
+                Logout
+              </div>
+            </span>
           </li>
         </ul>
       </div>
