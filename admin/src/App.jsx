@@ -52,7 +52,7 @@ function App() {
             }
           />
           <Route
-            path="/users/:userId"
+            path="/users/:id"
             element={
               <ProtectedRoute>
                 <Single />
@@ -78,7 +78,7 @@ function App() {
             }
           />
           <Route
-            path="/hotels/:productId"
+            path="/hotels/:id"
             element={
               <ProtectedRoute>
                 <Single />
@@ -104,7 +104,7 @@ function App() {
             }
           />
           <Route
-            path="/rooms/:productId"
+            path="/rooms/:id"
             element={
               <ProtectedRoute>
                 <Single />

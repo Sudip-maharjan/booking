@@ -8,7 +8,7 @@ import axios from "axios";
 const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-  const [list, setList] = useState();
+  const [list, setList] = useState([]);
   const { data, loading, error } = useFetch(`/api/${path}`);
 
   useEffect(() => {
@@ -18,13 +18,17 @@ const Datatable = ({ columns }) => {
   const handleDelete = async (id, hotelId) => {
     try {
       if (path === "rooms") {
-        console.log("Deleting room", { id, hotelId });
+        // Delete a room → needs hotelId
         await axios.delete(`/api/rooms/${id}/${hotelId}`);
       } else {
+        // Delete user / hotel
         await axios.delete(`/api/${path}/${id}`);
       }
-      setList(list.filter((item) => item._id !== id));
-    } catch (err) {}
+
+      setList((prev) => prev.filter((item) => item._id !== id));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const actionColumn = [
@@ -35,13 +39,17 @@ const Datatable = ({ columns }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link
+              to={`/${path}/${params.row._id}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="viewButton">View</div>
             </Link>
+
             <div
               className="deleteButton"
               onClick={() =>
-                handleDelete(params.row._id, params.row.hotelId._id)
+                handleDelete(params.row._id, params.row.hotelId?._id || null)
               }
             >
               Delete
@@ -51,6 +59,7 @@ const Datatable = ({ columns }) => {
       },
     },
   ];
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -59,6 +68,7 @@ const Datatable = ({ columns }) => {
           Add New
         </Link>
       </div>
+
       <DataGrid
         className="datagrid"
         rows={list}
