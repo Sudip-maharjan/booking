@@ -8,10 +8,10 @@ import EditIcon from "@mui/icons-material/Edit";
 const RoomSingle = () => {
   const { id } = useParams();
 
-  // ✅ Fetch room
+  // Fetch room
   const { data, loading, error } = useFetch(`/api/rooms/${id}`);
 
-  // ✅ Fetch hotel name when room hotelId becomes available
+  // Fetch hotel name when room hotelId becomes available
   const { data: hotelData } = useFetch(
     data?.hotelId ? `/api/hotels/find/${data.hotelId}` : null
   );
@@ -50,7 +50,7 @@ const RoomSingle = () => {
   // Hide internal fields
   const hiddenKeys = ["_id", "__v", "updatedAt"];
 
-  // ✅ Format display name
+  // Format display name
   const formatKey = (key) => {
     if (key === "roomNumbers") return "Room Numbers";
     if (key === "hotelId") return "Hotel";
@@ -61,16 +61,16 @@ const RoomSingle = () => {
       .trim();
   };
 
-  // ✅ Custom value formatting
+  // Custom value formatting
   const formatValue = (value, key) => {
     if (value === null || value === undefined) return "N/A";
 
-    // ✅ Show hotel name instead of ID
+    // Show hotel name instead of ID
     if (key === "hotelId") {
       return hotelData?.name || "Loading...";
     }
 
-    // ✅ Format roomNumbers array
+    // Format roomNumbers array
     if (key === "roomNumbers") {
       return value.map((room) => room.number).join(", ");
     }
