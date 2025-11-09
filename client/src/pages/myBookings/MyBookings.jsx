@@ -10,6 +10,10 @@ const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cancellingId, setCancellingId] = useState(null);
+  const [ratingModal, setRatingModal] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
+  const [submittingRating, setSubmittingRating] = useState(false);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -17,10 +21,11 @@ const MyBookings = () => {
 
       try {
         const res = await axios.get(`/api/bookings/user/${user._id}`);
+        console.log("Fetched bookings:", res.data);
         setBookings(res.data);
         setLoading(false);
       } catch (err) {
-        console.error(err);
+        console.error("Fetch bookings error:", err);
         setLoading(false);
       }
     };
@@ -37,7 +42,6 @@ const MyBookings = () => {
     try {
       await axios.put(`/api/bookings/${bookingId}/cancel`);
 
-      // Update the booking status in the local state
       setBookings(
         bookings.map((booking) =>
           booking._id === bookingId
@@ -48,11 +52,95 @@ const MyBookings = () => {
 
       alert("Booking cancelled successfully!");
     } catch (err) {
-      console.error(err);
+      console.error("Cancel booking error:", err);
       alert(err.response?.data?.message || "Failed to cancel booking");
     } finally {
       setCancellingId(null);
     }
+  };
+
+  const openRatingModal = (booking) => {
+    console.log("Opening rating modal for booking:", booking);
+    setRatingModal(booking);
+    setRating(0);
+    setHoveredRating(0);
+  };
+
+  const closeRatingModal = () => {
+    setRatingModal(null);
+    setRating(0);
+    setHoveredRating(0);
+  };
+
+  const handleSubmitRating = async () => {
+    if (rating === 0) {
+      alert("Please select a rating");
+      return;
+    }
+
+    console.log("Submitting rating:", {
+      hotelId: ratingModal.hotel._id,
+      rating,
+      username: user.username,
+      userId: user._id,
+      bookingId: ratingModal._id,
+    });
+
+    setSubmittingRating(true);
+    try {
+      const response = await axios.post(
+        `/api/hotels/${ratingModal.hotel._id}/review`,
+        {
+          rating,
+          username: user.username,
+          userId: user._id,
+          bookingId: ratingModal._id,
+        }
+      );
+
+      console.log("Rating submitted successfully:", response.data);
+
+      // Update booking to mark as rated
+      setBookings(
+        bookings.map((booking) =>
+          booking._id === ratingModal._id
+            ? { ...booking, hasRated: true }
+            : booking
+        )
+      );
+
+      alert("Thank you for your review!");
+      closeRatingModal();
+    } catch (err) {
+      console.error("Submit rating error:", err);
+      console.error("Error response:", err.response?.data);
+      alert(err.response?.data?.message || "Failed to submit rating");
+    } finally {
+      setSubmittingRating(false);
+    }
+  };
+
+  const canRate = (booking) => {
+    // Can rate if booking is confirmed and checkout date has passed
+    const checkoutDate = new Date(booking.checkOutDate);
+    const today = new Date();
+
+    // checkoutDate < today changed for testing
+    const canRateResult =
+      booking.status === "confirmed" &&
+      checkoutDate > today &&
+      !booking.hasRated;
+
+    // console.log("Can rate check:", {
+    //   bookingId: booking._id,
+    //   status: booking.status,
+    //   checkoutDate: checkoutDate.toISOString(),
+    //   today: today.toISOString(),
+    //   hasRated: booking.hasRated,
+    //   canRate: canRateResult,
+    // });
+
+    return canRateResult;
   };
 
   const getStatusColor = (status) => {
@@ -169,23 +257,89 @@ const MyBookings = () => {
                   {format(new Date(booking.createdAt), "dd MMM yyyy, HH:mm")}
                 </div>
 
-                {/* Cancel Button - Only show for non-cancelled bookings */}
-                {booking.status !== "cancelled" && (
-                  <button
-                    className="cancelButton"
-                    onClick={() => handleCancelBooking(booking._id)}
-                    disabled={cancellingId === booking._id}
-                  >
-                    {cancellingId === booking._id
-                      ? "Cancelling..."
-                      : "Cancel Booking"}
-                  </button>
-                )}
+                <div className="bookingActions">
+                  {booking.status !== "cancelled" && (
+                    <button
+                      className="cancelButton"
+                      onClick={() => handleCancelBooking(booking._id)}
+                      disabled={cancellingId === booking._id}
+                    >
+                      {cancellingId === booking._id
+                        ? "Cancelling..."
+                        : "Cancel Booking"}
+                    </button>
+                  )}
+
+                  {canRate(booking) && (
+                    <button
+                      className="rateButton"
+                      onClick={() => openRatingModal(booking)}
+                    >
+                      Rate Your Stay
+                    </button>
+                  )}
+
+                  {booking.hasRated && (
+                    <div className="ratedBadge">✓ Rated</div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
         )}
       </div>
+
+      {/* Rating Modal */}
+      {ratingModal && (
+        <div className="ratingModalOverlay" onClick={closeRatingModal}>
+          <div className="ratingModal" onClick={(e) => e.stopPropagation()}>
+            <button className="closeModal" onClick={closeRatingModal}>
+              ×
+            </button>
+
+            <h2>Rate Your Stay</h2>
+            <h3>{ratingModal.hotel?.name}</h3>
+
+            <div className="starRating">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`star ${
+                    star <= (hoveredRating || rating) ? "filled" : ""
+                  }`}
+                  onClick={() => setRating(star)}
+                  onMouseEnter={() => setHoveredRating(star)}
+                  onMouseLeave={() => setHoveredRating(0)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+
+            <div className="ratingText">
+              {rating === 0 && "Select a rating"}
+              {rating === 1 && "Poor"}
+              {rating === 2 && "Fair"}
+              {rating === 3 && "Good"}
+              {rating === 4 && "Very Good"}
+              {rating === 5 && "Excellent"}
+            </div>
+
+            <div className="modalActions">
+              <button
+                className="submitRating"
+                onClick={handleSubmitRating}
+                disabled={submittingRating || rating === 0}
+              >
+                {submittingRating ? "Submitting..." : "Submit Review"}
+              </button>
+              <button className="cancelRating" onClick={closeRatingModal}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

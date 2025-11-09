@@ -53,6 +53,10 @@ const BookingSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    hasRated: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

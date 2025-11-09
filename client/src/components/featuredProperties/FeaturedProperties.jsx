@@ -23,7 +23,17 @@ const FeaturedProperties = () => {
               {item.rating && (
                 <div className="fpRating">
                   <button>{item.rating}</button>
-                  <span>Excellent</span>
+                  <span>
+                    {item.rating <= 1
+                      ? "Poor"
+                      : item.rating <= 2
+                      ? "Fair"
+                      : item.rating <= 3
+                      ? "Good"
+                      : item.rating <= 4
+                      ? "Very Good"
+                      : "Excellent"}
+                  </span>
                 </div>
               )}
             </div>

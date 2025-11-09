@@ -69,11 +69,6 @@ const Header = ({ type }) => {
               </Link>
             </div>
           </div>
-          {user && (
-            <Link to="/bookings">
-              <button className="headerBookingsBtn">My Bookings</button>
-            </Link>
-          )}
         </div>
 
         {type !== "list" && (

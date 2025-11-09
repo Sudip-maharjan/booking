@@ -159,15 +159,28 @@ export const cancelBooking = async (req, res, next) => {
     }
 
     // Update each room's unavailable dates
+    // The booking.room array contains {roomId, roomNumber}
     for (const roomInfo of booking.room) {
-      await Room.updateOne(
-        { "roomNumbers._id": roomInfo.roomNumber },
-        {
-          $pull: {
-            "roomNumbers.$.unavailableDates": { $in: datesToRemove },
-          },
+      // Find the room by its roomId (ObjectId)
+      const room = await Room.findById(roomInfo.roomId);
+
+      if (room) {
+        // Find the specific room number within the roomNumbers array
+        const roomNumberIndex = room.roomNumbers.findIndex(
+          (rn) => rn.number === roomInfo.roomNumber
+        );
+
+        if (roomNumberIndex !== -1) {
+          // Remove the dates from unavailableDates
+          room.roomNumbers[roomNumberIndex].unavailableDates = room.roomNumbers[
+            roomNumberIndex
+          ].unavailableDates.filter(
+            (date) => !datesToRemove.includes(new Date(date).getTime())
+          );
+
+          await room.save();
         }
-      );
+      }
     }
 
     res.status(200).json({

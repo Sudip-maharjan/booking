@@ -96,7 +96,7 @@ const Reserve = ({ setOpen, hotelId }) => {
         totalPrice: calculateTotalPrice(),
         guests: options.adult + options.children || 1,
         paymentMethod: "Pay At Hotel",
-        status: "pending",
+        status: "confirmed",
         isPaid: false,
       };
 
