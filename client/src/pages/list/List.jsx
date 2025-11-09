@@ -61,7 +61,7 @@ const List = () => {
             {/* Dates */}
             <div className="lsItem">
               <label>Check-in Date</label>
-              <span onClick={() => setOpenDate(!openDate)}>
+              <span className="date-box" onClick={() => setOpenDate(!openDate)}>
                 {`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
                   dates[0].endDate,
                   "dd/MM/yyyy"

@@ -1,10 +1,12 @@
 import "./navbar.css";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { user, dispatch } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -12,10 +14,21 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // const firstLetter = user?.username ? user.username.charAt(0) : "?";
+
+  // const handleButton = () => {
+  //   dispatch({ type: "LOGOUT" });
+  //   localStorage.removeItem("user");
+  //   navigate("/");
+  // };
+
   return (
     <div className="navbar">
       <div className="navContainer">
-        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+        <Link
+          to="/"
+          style={{ color: "inherit", textDecoration: "none" }}
+        >
           <span className="logo">BookingApp</span>
         </Link>
         {user ? (
@@ -24,7 +37,10 @@ const Navbar = () => {
             <Link to="/my-bookings">
               <button className="navButton">My Bookings</button>
             </Link>
-            <button className="navButton" onClick={handleLogout}>
+            <button
+              className="navButton"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           </div>
@@ -38,6 +54,12 @@ const Navbar = () => {
             </Link>
           </div>
         )}
+        {/* <button
+          onClick={handleMenuBtn}
+          className="menu"
+        >
+          <GiHamburgerMenu />
+        </button> */}
       </div>
     </div>
   );

@@ -53,7 +53,11 @@ const Login = () => {
           value={credentials.password}
         />
 
-        <button disabled={loading} onClick={handleClick} className="lButton">
+        <button
+          disabled={loading}
+          onClick={handleClick}
+          className="lButton"
+        >
           {loading ? "Logging in..." : "Login"}
         </button>
 

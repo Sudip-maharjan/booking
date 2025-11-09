@@ -1,32 +1,39 @@
 .pList {
-    width: 100%;
-    max-width: 1024px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .pListItem {
-    flex: 1;
+  flex: 1;
 
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .pListImg {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
-.pListTitles>h1 {
-    font-size: 18px;
-    color: #444;
-    text-transform: capitalize;
+.pListTitles > h1 {
+  font-size: 18px;
+  color: #444;
+  text-transform: capitalize;
 }
 
-.pListTitles>h2 {
-    font-size: 14px;
-    font-weight: 300;
+.pListTitles > h2 {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .pList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 }

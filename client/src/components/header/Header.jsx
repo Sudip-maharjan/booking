@@ -1,10 +1,7 @@
 import {
   faBed,
   faCalendarDays,
-  faCar,
   faPerson,
-  faPlane,
-  faTaxi,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
@@ -28,6 +25,10 @@ const Header = ({ type }) => {
     },
   ]);
   const [openOptions, setOpenOptions] = useState(false);
+  const handleDateChange = (item) => {
+    setDates([item.selection]);
+    setOpenDate(false); // closes calendar right after selection
+  };
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
@@ -35,7 +36,7 @@ const Header = ({ type }) => {
   });
 
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -64,7 +65,10 @@ const Header = ({ type }) => {
           <div className="headerList">
             <div className="headerListItem active">
               <FontAwesomeIcon icon={faBed} />
-              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              <Link
+                to="/hotels"
+                style={{ textDecoration: "none", color: "white" }}
+              >
                 <span>Hotels</span>
               </Link>
             </div>
@@ -78,14 +82,17 @@ const Header = ({ type }) => {
               Unparallaled luxury and comfortawait at the world's most exclusive
               hotels and resorts. Start Your Journey Today.
             </p>
-            {!user && (
+            {/* {!user && (
               <Link to="/login">
                 <button className="headerBtn">Sign in / Register</button>
               </Link>
-            )}
+            )} */}
             <div className="headerSearch">
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faBed} className="headerIcon" />
+                <FontAwesomeIcon
+                  icon={faBed}
+                  className="headerIcon"
+                />
                 <input
                   type="text"
                   placeholder="Where are you going?"
@@ -93,8 +100,11 @@ const Header = ({ type }) => {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
-              <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
+              <div className="headerSearchItem ">
+                <FontAwesomeIcon
+                  icon={faCalendarDays}
+                  className="headerIcon"
+                />
                 <span
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
@@ -105,7 +115,8 @@ const Header = ({ type }) => {
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDates([item.selection])}
+                    onChange={handleDateChange}
+                    // onChange={(item) => setDates([item.selection])}
                     moveRangeOnFirstSelection={false}
                     ranges={dates}
                     className="date"
@@ -114,7 +125,10 @@ const Header = ({ type }) => {
                 )}
               </div>
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faPerson} className="headerIcon" />
+                <FontAwesomeIcon
+                  icon={faPerson}
+                  className="headerIcon"
+                />
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
@@ -188,7 +202,10 @@ const Header = ({ type }) => {
                 )}
               </div>
               <div className="headerSearchItem">
-                <button className="headerBtn" onClick={handleSearch}>
+                <button
+                  className="headerBtn"
+                  onClick={handleSearch}
+                >
                   Search
                 </button>
               </div>
