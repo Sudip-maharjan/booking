@@ -7,6 +7,7 @@ import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import bookingsRoute from "./routes/bookings.js";
 import reviewRoute from "./routes/review.js";
+import recommendationsRoute from "./routes/recommendations.js"; // NEW
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -37,6 +38,7 @@ app.use("/api/hotels", hotelsRoute);
 app.use("/api/hotels", reviewRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/bookings", bookingsRoute);
+app.use("/api/recommendations", recommendationsRoute); // NEW
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

@@ -5,6 +5,7 @@ import Header from "../../components/header/Header";
 import MailList from "../../components/mailList/MailList";
 import Navbar from "../../components/navbar/Navbar";
 import PropertyList from "../../components/propertyList/PropertyList";
+import Recommended from "../../components/recommended/Recommended";
 import "./home.css";
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
       <Navbar />
       <Header />
       <div className="homeContainer">
+        <Recommended />
         <Featured />
         <h1 className="homeTitle">Browse by property type</h1>
         <PropertyList />
