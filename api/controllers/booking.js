@@ -123,6 +123,61 @@ export const deleteBooking = async (req, res, next) => {
     next(err);
   }
 };
+//Cancel booking bu user
+export const cancelBooking = async (req, res, next) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+
+    if (!booking) {
+      return next(createError(404, "Booking not found"));
+    }
+
+    // Check if user owns the booking
+    if (booking.user.toString() !== req.user.id) {
+      return next(createError(403, "You can only cancel your own bookings"));
+    }
+
+    // Check if booking is already cancelled
+    if (booking.status === "cancelled") {
+      return next(createError(400, "Booking is already cancelled"));
+    }
+
+    // Update booking status to cancelled
+    booking.status = "cancelled";
+    await booking.save();
+
+    // Free up the room dates (remove unavailable dates)
+    const checkInDate = new Date(booking.checkInDate);
+    const checkOutDate = new Date(booking.checkOutDate);
+
+    const datesToRemove = [];
+    const currentDate = new Date(checkInDate);
+
+    while (currentDate <= checkOutDate) {
+      datesToRemove.push(new Date(currentDate).getTime());
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    // Update each room's unavailable dates
+    for (const roomInfo of booking.room) {
+      await Room.updateOne(
+        { "roomNumbers._id": roomInfo.roomNumber },
+        {
+          $pull: {
+            "roomNumbers.$.unavailableDates": { $in: datesToRemove },
+          },
+        }
+      );
+    }
+
+    res.status(200).json({
+      message: "Booking cancelled successfully",
+      booking,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 // Get hotel bookings (for checking availability)
 export const getHotelBookings = async (req, res, next) => {

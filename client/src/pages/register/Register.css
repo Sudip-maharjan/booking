@@ -1,15 +1,15 @@
-.login {
+.register {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.3),
             rgba(0, 0, 0, 0.3)),
-        url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3") center;
+        url("https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3") center;
     background-size: cover;
 }
 
-.lContainer {
+.rContainer {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -20,14 +20,14 @@
     min-width: 350px;
 }
 
-.lTitle {
+.rTitle {
     text-align: center;
     margin-bottom: 10px;
     color: #333;
     font-size: 24px;
 }
 
-.lInput {
+.rInput {
     height: 40px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -36,12 +36,12 @@
     transition: border-color 0.3s;
 }
 
-.lInput:focus {
+.rInput:focus {
     outline: none;
     border-color: #003580;
 }
 
-.lButton {
+.rButton {
     height: 45px;
     border: none;
     background-color: #003580;
@@ -54,16 +54,16 @@
     transition: background-color 0.3s;
 }
 
-.lButton:hover {
+.rButton:hover {
     background-color: #002050;
 }
 
-.lButton:disabled {
+.rButton:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
 }
 
-.lError {
+.rError {
     color: #dc3545;
     font-size: 14px;
     text-align: center;
@@ -73,19 +73,29 @@
     border-radius: 5px;
 }
 
-.lFooter {
+.rSuccess {
+    color: #155724;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+}
+
+.rFooter {
     text-align: center;
     margin-top: 15px;
     font-size: 14px;
     color: #666;
 }
 
-.lFooter a {
+.rFooter a {
     color: #003580;
     text-decoration: none;
     font-weight: 500;
 }
 
-.lFooter a:hover {
+.rFooter a:hover {
     text-decoration: underline;
 }

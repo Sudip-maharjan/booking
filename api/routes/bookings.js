@@ -9,6 +9,7 @@ import {
   updateBookingStatus,
   updatePaymentStatus,
   getRevenueStats,
+  cancelBooking,
 } from "../controllers/booking.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
@@ -31,6 +32,9 @@ router.get("/hotel/:hotelId", getHotelBookings);
 
 // GET single booking - User must own the booking or be admin
 router.get("/:id", verifyToken, getBooking);
+
+// CANCEL booking - User can cancel their own booking
+router.put("/:id/cancel", verifyToken, cancelBooking);
 
 // UPDATE booking status - Admin only
 router.put("/:id/status", verifyAdmin, updateBookingStatus);
