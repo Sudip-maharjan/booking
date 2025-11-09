@@ -5,6 +5,14 @@ import { AuthContext } from "../../context/AuthContext";
 const Navbar = () => {
   const { user } = useContext(AuthContext);
 
+  const firstLetter = user?.username ? user.username.charAt(0) : "?";
+
+  // const handleButton = () => {
+  //   dispatch({ type: "LOGOUT" });
+  //   localStorage.removeItem("user");
+  //   navigate("/");
+  // };
+
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -12,10 +20,17 @@ const Navbar = () => {
           to="/"
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          <span className="logo">booking</span>
+          <span className="logo">Booking</span>
         </Link>
         {user ? (
-          user.username
+          <Link
+            className="letter-link"
+            to={`/profile/${user.username}`}
+          >
+            <div className="avatar">
+              <p>{firstLetter}</p>
+            </div>
+          </Link>
         ) : (
           <div className="navItems">
             <Link to="/register">
