@@ -10,7 +10,7 @@ import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -25,6 +25,10 @@ const Header = ({ type }) => {
     },
   ]);
   const [openOptions, setOpenOptions] = useState(false);
+  const handleDateChange = (item) => {
+    setDates([item.selection]);
+    setOpenDate(false); // closes calendar right after selection
+  };
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
@@ -32,7 +36,7 @@ const Header = ({ type }) => {
   });
 
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -57,37 +61,32 @@ const Header = ({ type }) => {
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-        {/* <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
+        <div className="headerTop">
+          <div className="headerList">
+            <div className="headerListItem active">
+              <FontAwesomeIcon icon={faBed} />
+              <Link
+                to="/hotels"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <span>Hotels</span>
+              </Link>
+            </div>
           </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Attractions</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport taxis</span>
-          </div>
-        </div> */}
+        </div>
+
         {type !== "list" && (
           <>
-            <h1 className="headerTitle">
-              A lifetime of discounts? It's Genius.
-            </h1>
+            <h1 className="headerTitle">Discover Your Perfect Destination</h1>
             <p className="headerDesc">
-              Get rewarded for your travels – unlock instant savings of 10%.
+              Unparallaled luxury and comfortawait at the world's most exclusive
+              hotels and resorts. Start Your Journey Today.
             </p>
-            {!user && <button className="headerBtn">Sign in / Register</button>}
+            {/* {!user && (
+              <Link to="/login">
+                <button className="headerBtn">Sign in / Register</button>
+              </Link>
+            )} */}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon
@@ -101,7 +100,7 @@ const Header = ({ type }) => {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
-              <div className="headerSearchItem">
+              <div className="headerSearchItem ">
                 <FontAwesomeIcon
                   icon={faCalendarDays}
                   className="headerIcon"
@@ -116,7 +115,8 @@ const Header = ({ type }) => {
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDates([item.selection])}
+                    onChange={handleDateChange}
+                    // onChange={(item) => setDates([item.selection])}
                     moveRangeOnFirstSelection={false}
                     ranges={dates}
                     className="date"

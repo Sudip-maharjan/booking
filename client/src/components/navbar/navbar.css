@@ -1,3 +1,60 @@
+/* .navbar {
+  height: 50px;
+  background-color: #003580;
+  display: flex;
+  justify-content: center;
+}
+
+.navContainer {
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.logo {
+  font-weight: 500;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.navButton {
+  margin-left: 15px;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  color: #003580;
+  background-color: white;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.navButton:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.navButton:active {
+  transform: translateY(0);
+}
+
+.navItems {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navUsername {
+  color: white;
+  font-weight: 500;
+  margin-right: 5px;
+  font-size: 14px;
+} */
+
 .navbar {
   height: 50px;
   background-color: #003580;
@@ -8,37 +65,118 @@
 .navContainer {
   width: 100%;
   max-width: 80rem;
-  margin: auto;
-  color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .logo {
   font-weight: 500;
+  color: white;
+  font-size: 20px;
+}
+
+.navItems {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navUsername {
+  color: white;
+  font-weight: 500;
 }
 
 .navButton {
-  margin-left: 20px;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+  padding: 8px 15px;
+  background-color: white;
   color: #003580;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-.avatar {
-  border: 1px solid black;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: whitesmoke;
+/* Tablet devices (768px and below) */
+@media screen and (max-width: 768px) {
+  /* .navContainer {
+    padding: 0 15px;
+  } */
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .navItems {
+    gap: 10px;
+  }
+
+  .navUsername {
+    font-size: 14px;
+  }
+
+  .navButton {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
 }
-.letter-link {
-  text-decoration: none;
-  color: black;
+
+/* Mobile devices (480px and below) */
+@media screen and (max-width: 480px) {
+  .navbar {
+    height: auto;
+    min-height: 50px;
+  }
+
+  .navContainer {
+    /* padding: 10px; */
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 16px;
+    flex: 1;
+  }
+
+  .navItems {
+    gap: 8px;
+    /* flex-wrap: wrap; */
+    justify-content: flex-end;
+  }
+
+  .navUsername {
+    font-size: 13px;
+    width: 100%;
+    text-align: right;
+  }
+
+  .navButton {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Small mobile devices (360px and below) */
+@media screen and (max-width: 360px) {
+  .navContainer {
+    padding: 8px;
+  }
+
+  .logo {
+    font-size: 14px;
+  }
+
+  .navItems {
+    gap: 6px;
+  }
+
+  .navButton {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .navUsername {
+    font-size: 12px;
+  }
 }

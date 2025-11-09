@@ -1,19 +1,23 @@
 .header {
+  width: 100%;
   background-color: #003580;
   color: white;
   display: flex;
   justify-content: center;
   position: relative;
+  padding-bottom: 50px;
 }
 
 .headerContainer {
   width: 100%;
   max-width: 80rem;
-  margin: 20px 0px 100px 0px;
+
+  padding: 0 2rem;
 }
 
 .headerContainer.listMode {
   margin: 20px 0px 0px 0px;
+  padding-bottom: 20px;
 }
 
 .headerList {
@@ -26,6 +30,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .headerListItem.active {
@@ -45,6 +50,7 @@
   border: none;
   padding: 10px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .headerSearch {
@@ -54,12 +60,12 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 10px 0px;
+  padding: 20px 0px;
   border-radius: 5px;
   position: absolute;
   bottom: -25px;
   width: 100%;
-  max-width: 1024px;
+  max-width: 80rem;
 }
 
 .headerIcon {
@@ -86,10 +92,10 @@
   position: absolute;
   top: 50px;
   z-index: 2;
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
 .options {
-  z-index: 2;
   position: absolute;
   top: 50px;
   background-color: white;
@@ -97,6 +103,7 @@
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+  z-index: 2;
 }
 
 .optionItem {
@@ -125,4 +132,45 @@
 
 .optionCounterButton:disabled {
   cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerBookingsBtn {
+  background-color: #febb02;
+  color: #003580;
+  font-weight: 600;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.headerBookingsBtn:hover {
+  background-color: #ffcc44;
+}
+
+@media (max-width: 998px) {
+  .headerSearch {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerTitle {
+    font-size: 1.3rem;
+  }
+  .headerDesc {
+    font-size: 0.8rem;
+  }
 }

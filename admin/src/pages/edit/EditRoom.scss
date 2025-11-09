@@ -1,0 +1,363 @@
+.new {
+  width: 100%;
+  display: flex;
+
+  .newContainer {
+    flex: 6;
+
+    .top,
+    .bottom {
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 20px;
+      margin: 20px;
+      display: flex;
+      background-color: white;
+      border-radius: 10px;
+
+      h1 {
+        color: lightgray;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+
+    .bottom {
+      .right {
+        flex: 1;
+
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          .formInput {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            label {
+              font-size: 14px;
+              font-weight: 500;
+              color: #333;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              .icon {
+                cursor: pointer;
+                font-size: 20px;
+                color: #6366f1;
+              }
+            }
+
+            input,
+            select {
+              width: 100%;
+              padding: 12px;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+              font-size: 14px;
+              transition: all 0.2s ease;
+
+              &:focus {
+                outline: none;
+                border-color: #6366f1;
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+              }
+
+              &::placeholder {
+                color: #9ca3af;
+              }
+            }
+
+            select {
+              cursor: pointer;
+              background-color: white;
+
+              &[multiple] {
+                min-height: 150px;
+                padding: 8px;
+
+                option {
+                  padding: 8px;
+                  border-radius: 4px;
+                  margin-bottom: 4px;
+                  cursor: pointer;
+
+                  &:hover {
+                    background-color: #f3f4f6;
+                  }
+
+                  &:checked {
+                    background-color: #6366f1;
+                    color: white;
+                  }
+                }
+              }
+            }
+
+            // Room Numbers Container Styles
+            .roomNumbersContainer {
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              padding: 12px;
+              background-color: #f9fafb;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+
+              .roomNumberItem {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                animation: slideIn 0.2s ease;
+
+                @keyframes slideIn {
+                  from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+
+                input {
+                  flex: 1;
+                  padding: 10px 12px;
+                  border: 1px solid #d1d5db;
+                  border-radius: 6px;
+                  font-size: 14px;
+                  transition: all 0.2s ease;
+
+                  &:focus {
+                    outline: none;
+                    border-color: #6366f1;
+                    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+                  }
+
+                  &::placeholder {
+                    color: #9ca3af;
+                  }
+                }
+
+                .removeButton {
+                  padding: 10px 16px;
+                  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                  color: white;
+                  border: none;
+                  border-radius: 6px;
+                  cursor: pointer;
+                  font-size: 13px;
+                  font-weight: 500;
+                  transition: all 0.2s ease;
+                  white-space: nowrap;
+
+                  &:hover {
+                    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+                  }
+
+                  &:active {
+                    transform: translateY(0);
+                  }
+                }
+              }
+
+              .addButton {
+                padding: 12px 18px;
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                margin-top: 6px;
+
+                &:hover {
+                  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+                  transform: translateY(-2px);
+                  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+                }
+
+                &:active {
+                  transform: translateY(0);
+                }
+              }
+            }
+          }
+
+          button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+
+            &:hover:not(:disabled) {
+              background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+              transform: translateY(-2px);
+              box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+            }
+
+            &:active:not(:disabled) {
+              transform: translateY(0);
+            }
+
+            &:disabled {
+              cursor: not-allowed;
+              background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+            }
+          }
+        }
+      }
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      font-size: 18px;
+      color: #6b7280;
+      font-weight: 500;
+
+      &::before {
+        content: "";
+        width: 40px;
+        height: 40px;
+        margin-right: 12px;
+        border: 4px solid #e5e7eb;
+        border-top-color: #6366f1;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}
+
+// Dark mode support
+.app.dark {
+  .new {
+    .newContainer {
+      .top,
+      .bottom {
+        background-color: #1f2937;
+        box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+
+        h1 {
+          color: #9ca3af;
+        }
+      }
+
+      .bottom {
+        .right {
+          form {
+            .formInput {
+              label {
+                color: #e5e7eb;
+              }
+
+              input,
+              select {
+                background-color: #374151;
+                border-color: #4b5563;
+                color: #e5e7eb;
+
+                &:focus {
+                  border-color: #6366f1;
+                  background-color: #374151;
+                }
+
+                &::placeholder {
+                  color: #6b7280;
+                }
+              }
+
+              .roomNumbersContainer {
+                background-color: #374151;
+                border-color: #4b5563;
+
+                .roomNumberItem {
+                  input {
+                    background-color: #1f2937;
+                    border-color: #4b5563;
+                    color: #e5e7eb;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .loading {
+        color: #9ca3af;
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media screen and (max-width: 768px) {
+  .new {
+    .newContainer {
+      .top,
+      .bottom {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      .bottom {
+        .right {
+          form {
+            gap: 15px;
+
+            .formInput {
+              .roomNumbersContainer {
+                .roomNumberItem {
+                  flex-direction: column;
+                  align-items: stretch;
+
+                  input {
+                    width: 100%;
+                  }
+
+                  .removeButton {
+                    width: 100%;
+                    padding: 10px;
+                  }
+                }
+
+                .addButton {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

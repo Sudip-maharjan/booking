@@ -1,11 +1,20 @@
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-const Navbar = () => {
-  const { user } = useContext(AuthContext);
 
-  const firstLetter = user?.username ? user.username.charAt(0) : "?";
+const Navbar = () => {
+  const { user, dispatch } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+  };
+
+  // const firstLetter = user?.username ? user.username.charAt(0) : "?";
 
   // const handleButton = () => {
   //   dispatch({ type: "LOGOUT" });
@@ -20,17 +29,21 @@ const Navbar = () => {
           to="/"
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          <span className="logo">Booking</span>
+          <span className="logo">BookingApp</span>
         </Link>
         {user ? (
-          <Link
-            className="letter-link"
-            to={`/profile/${user.username}`}
-          >
-            <div className="avatar">
-              <p>{firstLetter}</p>
-            </div>
-          </Link>
+          <div className="navItems">
+            <span className="navUsername">{user.username}</span>
+            <Link to="/my-bookings">
+              <button className="navButton">My Bookings</button>
+            </Link>
+            <button
+              className="navButton"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
         ) : (
           <div className="navItems">
             <Link to="/register">
@@ -41,6 +54,12 @@ const Navbar = () => {
             </Link>
           </div>
         )}
+        {/* <button
+          onClick={handleMenuBtn}
+          className="menu"
+        >
+          <GiHamburgerMenu />
+        </button> */}
       </div>
     </div>
   );

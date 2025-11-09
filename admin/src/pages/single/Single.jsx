@@ -1,36 +1,67 @@
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Chart from "../../components/chart/Chart";
-import List from "../../components/table/Table";
-import { useParams, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import EditIcon from "@mui/icons-material/Edit";
 
 const Single = () => {
   const { id } = useParams();
-  const location = useLocation();
-  const path = location.pathname.split("/")[1]; // users / hotels / rooms
+  const { data, loading, error } = useFetch(`/api/users/${id}`);
 
-  // ✅ Fix: Dynamic API endpoint for hotels
-  const apiEndpoint =
-    path === "hotels"
-      ? `/api/${path}/find/${id}` // hotel route uses /find/:id
-      : `/api/${path}/${id}`;
+  if (loading) {
+    return (
+      <div className="single">
+        <Sidebar />
+        <div className="singleContainer">
+          <Navbar />
+          <div className="loadingState">
+            <div className="spinner"></div>
+            <p>Loading user details...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-  // Fetch data
-  const { data, loading, error } = useFetch(apiEndpoint);
+  if (error || !data) {
+    return (
+      <div className="single">
+        <Sidebar />
+        <div className="singleContainer">
+          <Navbar />
+          <div className="errorState">
+            <div className="errorIcon">⚠️</div>
+            <h2>Error Loading Data</h2>
+            <p>Unable to fetch user information. Please try again.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-  if (loading) return <div>Loading...</div>;
-  if (error || !data) return <div>Error loading {path} data</div>;
+  const hiddenKeys = ["_id", "__v", "password", "updatedAt", "img"];
 
-  // Dynamic image fallback for users & hotels
-  const imageSrc =
-    data.img ||
-    data.photos?.[0] ||
-    "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg";
+  const formatKey = (key) => {
+    return key
+      .replace(/([A-Z])/g, " $1")
+      .replace(/^./, (str) => str.toUpperCase())
+      .trim();
+  };
 
-  // Keys to hide from the list
-  const hiddenKeys = ["_id", "__v", "img", "password", "photos", "updatedAt"];
+  const formatValue = (value) => {
+    if (value === null || value === undefined) return "N/A";
+    if (typeof value === "boolean") return value ? "Yes" : "No";
+    if (typeof value === "object") {
+      if (Array.isArray(value)) return value.join(", ");
+      return JSON.stringify(value, null, 2);
+    }
+    if (typeof value === "number") return value.toLocaleString();
+    return value.toString();
+  };
+
+  const imageSrc = data.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
+  const displayTitle = data.username || "User Details";
 
   return (
     <div className="single">
@@ -38,40 +69,53 @@ const Single = () => {
       <div className="singleContainer">
         <Navbar />
 
-        <div className="top">
-          <div className="left">
-            <div className="editButton">Edit</div>
-            <h1 className="title">
-              {path.slice(0, -1).toUpperCase()} Information
-            </h1>
+        <div className="contentWrapper">
+          {/* Header Section */}
+          <div className="pageHeader">
+            <div className="headerContent">
+              <div className="breadcrumb">
+                <span className="breadcrumbItem">users</span>
+                <span className="breadcrumbSeparator">/</span>
+                <span className="breadcrumbItem active">{displayTitle}</span>
+              </div>
+              <h1 className="pageTitle">{displayTitle}</h1>
+              <p className="pageSubtitle">View and manage user information</p>
+            </div>
+            <Link to={`/users/edit/${id}`} style={{ textDecoration: "none" }}>
+              <button className="editButton">
+                <EditIcon />
+                <span>Edit</span>
+              </button>
+            </Link>
+          </div>
 
-            <div className="item">
-              <img src={imageSrc} alt="" className="itemImg" />
-              <div className="details">
-                <h1 className="itemTitle">
-                  {data.username || data.name || data.title || "Details"}
-                </h1>
+          {/* Main Content Card */}
+          <div className="detailsCard">
+            <div className="cardHeader">
+              <div className="imageWrapper">
+                <img
+                  src={imageSrc}
+                  alt={displayTitle}
+                  className="entityImage"
+                />
+                <div className="imageOverlay">
+                  <span className="entityBadge">user</span>
+                </div>
+              </div>
+            </div>
 
+            <div className="cardBody">
+              <div className="infoGrid">
                 {Object.entries(data)
                   .filter(([key]) => !hiddenKeys.includes(key))
                   .map(([key, value]) => (
-                    <div className="detailItem" key={key}>
-                      <span className="itemKey">
-                        {key.charAt(0).toUpperCase() + key.slice(1)}:
-                      </span>
-                      <span className="itemValue">
-                        {typeof value === "object"
-                          ? JSON.stringify(value)
-                          : value?.toString() ?? "N/A"}
-                      </span>
+                    <div className="infoItem" key={key}>
+                      <div className="infoLabel">{formatKey(key)}</div>
+                      <div className="infoValue">{formatValue(value)}</div>
                     </div>
                   ))}
               </div>
             </div>
-          </div>
-
-          <div className="right">
-            <Chart aspect={3 / 1} title="Activity (Last 6 Months)" />
           </div>
         </div>
       </div>

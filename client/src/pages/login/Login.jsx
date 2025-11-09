@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./login.css";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    username: undefined,
-    password: undefined,
+    username: "",
+    password: "",
   });
 
   const { loading, error, dispatch } = useContext(AuthContext);
@@ -31,33 +31,43 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleClick}>
-      <div className="login">
-        <div className="lContainer">
-          <input
-            type="text"
-            placeholder="username"
-            id="username"
-            onChange={handleChange}
-            className="lInput"
-          />
-          <input
-            type="password"
-            placeholder="password"
-            id="password"
-            onChange={handleChange}
-            className="lInput"
-          />
-          <button
-            disabled={loading}
-            className="lButton"
-          >
-            Login
-          </button>
-          {error && <span>{error.message}</span>}
+    <div className="login">
+      <div className="lContainer">
+        <h2 className="lTitle">Welcome Back</h2>
+
+        <input
+          type="text"
+          placeholder="Username"
+          id="username"
+          onChange={handleChange}
+          className="lInput"
+          value={credentials.username}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          id="password"
+          onChange={handleChange}
+          className="lInput"
+          value={credentials.password}
+        />
+
+        <button
+          disabled={loading}
+          onClick={handleClick}
+          className="lButton"
+        >
+          {loading ? "Logging in..." : "Login"}
+        </button>
+
+        {error && <span className="lError">{error.message}</span>}
+
+        <div className="lFooter">
+          Don't have an account? <Link to="/register">Register here</Link>
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 

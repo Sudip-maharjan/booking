@@ -1,0 +1,465 @@
+.myBookingsContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+.myBookingsTitle {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.loadingText {
+    text-align: center;
+    font-size: 20px;
+    color: #666;
+    padding: 40px;
+}
+
+.noBookings {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.noBookings h2 {
+    font-size: 28px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.noBookings p {
+    font-size: 16px;
+    color: #888;
+}
+
+.bookingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.bookingCard {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bookingCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bookingHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.hotelInfo {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+}
+
+.bookingImage {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.hotelInfo h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.hotelLocation {
+    font-size: 14px;
+    color: #666;
+}
+
+.bookingStatus {
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.bookingDetails {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.detailItem {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detailLabel {
+    font-size: 13px;
+    color: #888;
+    font-weight: 500;
+}
+
+.detailValue {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.bookingFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    margin-bottom: 12px;
+}
+
+.paymentInfo {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.paymentMethod {
+    font-size: 14px;
+    color: #666;
+    padding: 6px 12px;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+
+.paymentStatus {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.paymentStatus.paid {
+    background: #d4edda;
+    color: #155724;
+}
+
+.paymentStatus.unpaid {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.totalPrice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.totalPrice .price {
+    font-size: 24px;
+    color: #003580;
+    font-weight: bold;
+}
+
+.bookingDate {
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+    margin-bottom: 12px;
+}
+
+.bookingActions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.cancelButton {
+    flex: 1;
+    min-width: 150px;
+    padding: 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancelButton:hover:not(:disabled) {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.cancelButton:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.rateButton {
+    flex: 1;
+    min-width: 150px;
+    padding: 12px;
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.rateButton:hover {
+    background-color: #ff8c00;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3);
+}
+
+.ratedBadge {
+    padding: 12px 24px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Rating Modal */
+.ratingModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.ratingModal {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.closeModal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.closeModal:hover {
+    color: #333;
+}
+
+.ratingModal h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.ratingModal h3 {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.starRating {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.star {
+    font-size: 48px;
+    color: #ddd;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.star:hover {
+    transform: scale(1.15);
+}
+
+.star.filled {
+    color: #ffa500;
+}
+
+.ratingText {
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 24px;
+    min-height: 30px;
+}
+
+.commentBox {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    margin-bottom: 24px;
+    transition: border-color 0.2s;
+}
+
+.commentBox:focus {
+    outline: none;
+    border-color: #003580;
+}
+
+.modalActions {
+    display: flex;
+    gap: 12px;
+}
+
+.submitRating {
+    flex: 1;
+    padding: 14px;
+    background-color: #003580;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submitRating:hover:not(:disabled) {
+    background-color: #002a5c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 53, 128, 0.3);
+}
+
+.submitRating:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.cancelRating {
+    padding: 14px 24px;
+    background-color: #f5f5f5;
+    color: #333;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancelRating:hover {
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .bookingHeader {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .hotelInfo {
+        flex-direction: column;
+    }
+
+    .bookingImage {
+        width: 100%;
+        height: 200px;
+    }
+
+    .bookingDetails {
+        grid-template-columns: 1fr;
+    }
+
+    .bookingFooter {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .bookingActions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cancelButton,
+    .rateButton {
+        width: 100%;
+    }
+
+    .ratingModal {
+        padding: 24px;
+    }
+
+    .star {
+        font-size: 36px;
+    }
+
+    .modalActions {
+        flex-direction: column;
+    }
+
+    .cancelRating {
+        width: 100%;
+    }
+}

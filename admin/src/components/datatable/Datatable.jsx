@@ -70,6 +70,7 @@ const Datatable = ({ columns }) => {
       </div>
 
       <DataGrid
+        style={{ height: 600, width: "100%" }}
         className="datagrid"
         rows={list}
         columns={columns.concat(actionColumn)}

@@ -3,8 +3,8 @@ import Home from "./pages/Home/Home";
 import List from "./pages/list/List";
 import Hotel from "./pages/hotelDetails/Hotel";
 import Login from "./pages/login/Login";
-import Profile from "./pages/userProfile/Profile";
 import Register from "./pages/register/Register";
+import MyBookings from "./pages/myBookings/MyBookings";
 function App() {
   return (
     <BrowserRouter>
@@ -30,8 +30,8 @@ function App() {
           element={<Register />}
         />
         <Route
-          path="/profile/:username"
-          element={<Profile />}
+          path="/my-bookings"
+          element={<MyBookings />}
         />
       </Routes>
     </BrowserRouter>

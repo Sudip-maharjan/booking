@@ -3,30 +3,89 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.3)),
+        url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3") center;
+    background-size: cover;
 }
 
 .lContainer {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    min-width: 350px;
+}
+
+.lTitle {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 24px;
 }
 
 .lInput {
-    height: 30px;
+    height: 40px;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.lInput:focus {
+    outline: none;
+    border-color: #003580;
 }
 
 .lButton {
+    height: 45px;
     border: none;
-    padding: 10px 20px;
-    background-color: #0071c2;
+    background-color: #003580;
     color: white;
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.lButton:hover {
+    background-color: #002050;
 }
 
 .lButton:disabled {
-    background-color: #0071c28c;
+    background-color: #6c757d;
     cursor: not-allowed;
+}
+
+.lError {
+    color: #dc3545;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+.lFooter {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.lFooter a {
+    color: #003580;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.lFooter a:hover {
+    text-decoration: underline;
 }

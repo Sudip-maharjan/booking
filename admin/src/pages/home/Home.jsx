@@ -17,18 +17,26 @@ const Home = () => {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
-        <div className="widgets">
-          <Widget type="user" count={users.length} />
-          <Widget type="hotel" count={hotels.length} />
-          <Widget type="room" count={rooms.length} />
-        </div>
-        <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-        </div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
+        <div className="contentWrapper">
+          <div className="widgets">
+            <Widget type="user" count={users.length} />
+            <Widget type="hotel" count={hotels.length} />
+            <Widget type="room" count={rooms.length} />
+          </div>
+          <div className="charts">
+            <div className="chartCard">
+              <Featured />
+            </div>
+            <div className="chartCard">
+              <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+            </div>
+          </div>
+          <div className="listContainer">
+            <div className="listHeader">
+              <h3 className="listTitle">Latest Transactions</h3>
+            </div>
+            <Table />
+          </div>
         </div>
       </div>
     </div>
