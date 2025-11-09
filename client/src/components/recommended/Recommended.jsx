@@ -20,12 +20,9 @@ const Recommended = () => {
       }
 
       try {
-        const response = await fetch(
-          `api/recommendations/${user._id}`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`api/recommendations/${user._id}`, {
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch recommendations");
@@ -94,7 +91,7 @@ const Recommended = () => {
         <div className="recommendedHeader">
           <h1 className="recommendedTitle">
             {type === "personalized"
-              ? "🎯 Recommended For You"
+              ? "Recommended For You"
               : "⭐ Popular Hotels"}
           </h1>
           <p className="recommendedSubtitle">{message}</p>

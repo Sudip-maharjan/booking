@@ -8,15 +8,21 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 
 const Sidebar = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const { dispatch } = useContext(DarkModeContext);
+
+  // ✅ rename dispatch so they don't conflict
+  const { dispatch: authDispatch } = useContext(AuthContext);
+  const { dispatch: themeDispatch } = useContext(DarkModeContext);
+
   const nav = useNavigate();
+
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    nav("/login");
+    authDispatch({ type: "LOGOUT" });
+    nav("/");
   };
 
   return (
@@ -26,68 +32,77 @@ const Sidebar = () => {
           <span className="logo">BookingAdmin</span>
         </Link>
       </div>
+
       <hr />
+
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
+
           <li>
             <Link to="/" style={{ textDecoration: "none" }}>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
             </Link>
           </li>
+
           <p className="title">LISTS</p>
+
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
             </li>
           </Link>
+
           <Link to="/hotels" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
               <span>Hotels</span>
             </li>
           </Link>
+
           <Link to="/rooms" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
               <span>Rooms</span>
             </li>
           </Link>
+
           <Link to="/bookings" style={{ textDecoration: "none" }}>
             <li>
               <CalendarMonthIcon className="icon" />
               <span>Bookings</span>
             </li>
           </Link>
+
           <p className="title">USER</p>
 
-          <Link to={`/users/${user._id}`}>
-            <li>
-              <AccountCircleOutlinedIcon className="icon" />
-              <span>Profile</span>
-            </li>
-          </Link>
+          {user && (
+            <Link to={`/users/${user._id}`}>
+              <li>
+                <AccountCircleOutlinedIcon className="icon" />
+                <span>Profile</span>
+              </li>
+            </Link>
+          )}
 
-          <li>
+          <li onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
-            <span>
-              <div className="logoutBtn" onClick={handleLogout}>
-                Logout
-              </div>
-            </span>
+            <span>Logout</span>
           </li>
         </ul>
       </div>
+
       <div className="bottom">
         <div
           className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
+          onClick={() => themeDispatch({ type: "LIGHT" })}
         ></div>
+
         <div
           className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
+          onClick={() => themeDispatch({ type: "DARK" })}
         ></div>
       </div>
     </div>
