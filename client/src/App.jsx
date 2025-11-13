@@ -5,6 +5,7 @@ import Hotel from "./pages/hotelDetails/Hotel";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import MyBookings from "./pages/myBookings/MyBookings";
+import AllHotel from "./pages/listHotels/AllHotel";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,10 @@ function App() {
         <Route
           path="/hotels"
           element={<List />}
+        />
+        <Route
+          path="/allhotels"
+          element={<AllHotel/>}
         />
         <Route
           path="/hotels/:id"

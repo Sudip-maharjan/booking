@@ -146,7 +146,7 @@ const Recommended = () => {
                   )}
                 </div>
                 <span className="recommendedPrice">
-                  Starting from ${hotel.cheapestPrice}
+                  Starting from Rs.{hotel.cheapestPrice}
                 </span>
                 {hotel.type && (
                   <span className="recommendedType">

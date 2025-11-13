@@ -38,12 +38,36 @@ const Header = ({ type }) => {
   const navigate = useNavigate();
   // const { user } = useContext(AuthContext);
 
+  // const handleOption = (name, operation) => {
+  //   setOptions((prev) => {
+  //     return {
+  //       ...prev,
+  //       [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+  //     };
+  //   });
+  // };
   const handleOption = (name, operation) => {
     setOptions((prev) => {
-      return {
-        ...prev,
-        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
-      };
+      let newOptions = { ...prev };
+
+      // Update the selected option
+      newOptions[name] = operation === "i" ? prev[name] + 1 : prev[name] - 1;
+
+      // Enforce max 2 guests per room
+      const totalGuests = newOptions.adult + newOptions.children;
+
+      // If totalGuests > 2, adjust based on rules
+      if (totalGuests > 2) {
+        if (newOptions.adult > 1) {
+          newOptions.adult = 2;
+          newOptions.children = 0;
+        } else if (newOptions.adult === 1 && newOptions.children > 1) {
+          newOptions.children = 1;
+        }
+        
+      }
+
+      return newOptions;
     });
   };
 
@@ -66,7 +90,7 @@ const Header = ({ type }) => {
             <div className="headerListItem active">
               <FontAwesomeIcon icon={faBed} />
               <Link
-                to="/hotels"
+                to="/allhotels"
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <span>Hotels</span>

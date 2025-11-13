@@ -127,7 +127,7 @@ export const bookingColumns = [
     headerName: "Total Price",
     width: 120,
     renderCell: (params) => {
-      return `$${params.row.totalPrice}`;
+      return `Rs.${params.row.totalPrice}`;
     },
   },
   {
