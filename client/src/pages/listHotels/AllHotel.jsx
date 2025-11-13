@@ -1,55 +1,70 @@
-import React from 'react'
-
+import React from "react";
+import useFetch from "../../hooks/useFetch";
+import { Link } from "react-router-dom";
+import "./allhotel.css";
 const AllHotel = () => {
+  // Sample hotel data array
+  const { data } = useFetch("/api/hotels");
+
   return (
-     <div class="container">
-        <div class="hotel-card">
-            <div class="image-gallery">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" alt="Om sweet Home" class="main-image" id="mainImage">
-                <div class="badge">Featured ⭐</div>
-                <div class="distance-badge">100m from center</div>
-                <div class="thumbnail-container">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200" alt="View 1" class="thumbnail" onclick="changeImage(this.src)">
-                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=200" alt="View 2" class="thumbnail" onclick="changeImage(this.src)">
-                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=200" alt="View 3" class="thumbnail" onclick="changeImage(this.src)">
-                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=200" alt="View 4" class="thumbnail" onclick="changeImage(this.src)">
-                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=200" alt="View 5" class="thumbnail" onclick="changeImage(this.src)">
-                </div>
-            </div>
+    <div className="hotels-page">
+      <div className="header-section">
+        <h1 className="page-title">Discover Your Perfect Stay in Nepal</h1>
+      </div>
 
-            <div class="hotel-content">
-                <div class="hotel-header">
-                    <div class="hotel-title">
-                        <div class="hotel-type">Hotel</div>
-                        <h1 class="hotel-name">Om sweet Home ॐ</h1>
-                        <div class="location">Dristi marga 47, lakeside, Pokhara 33700</div>
-                    </div>
-                    <div class="rating-section">
-                        <div class="rating">
-                            <span class="stars">★★★</span>
-                            <span>3.5</span>
-                        </div>
-                        <div class="reviews">2 reviews</div>
-                    </div>
+      <div className="hotels-container">
+        <div className="hotels-grid">
+          {data.map((hotel) => (
+            <Link
+              key={hotel._id}
+              to={`/hotels/${hotel._id}`}
+              className="hotel-card"
+            >
+              <div className="card-link">
+                <div className="image-wrapper">
+                  <img
+                    src={hotel.photos[0]}
+                    alt={hotel.name}
+                    className="hotel-image"
+                  />
+                  {hotel.featured && (
+                    <div className="featured-badge">Featured ⭐</div>
+                  )}
+                  <div className="overlay">
+                    <span className="view-details">View Details →</span>
+                  </div>
                 </div>
 
-                <p class="description">
-                    You might be eligible for a Genius discount at Om sweet Home ॐ. Experience luxury in the heart of Kathmandu with stunning views, world-class amenities, and exceptional hospitality. Our carefully designed spaces offer the perfect blend of comfort and elegance for your memorable stay.
-                </p>
-
-                <div class="hotel-footer">
-                    <div class="price-section">
-                        <div class="price-label">Starting from</div>
-                        <div class="price">$60<span>/night</span></div>
+                <div className="card-content">
+                  <div className="card-header">
+                    <div>
+                      <span className="hotel-type">{hotel.type}</span>
+                      <h2 className="hotel-name">{hotel.name}</h2>
+                      <div className="location">
+                        <span className="location-icon">📍</span>
+                        <span>{hotel.city}</span>
+                      </div>
                     </div>
-                    <div class="rooms-info">1 Room Available</div>
-                    <button class="btn-book">Book Now</button>
+                  </div>
+
+                  <p className="description">{hotel.desc}</p>
+
+                  <div className="card-footer">
+                    <div className="price-info">
+                      <span className="price">Rs.{hotel.cheapestPrice}</span>
+                      <span className="night-text">/night</span>
+                    </div>
+                    <div className="cta-wrapper">
+                      <button className="cta-button">View Details</button>
+                    </div>
+                  </div>
                 </div>
-            </div>
+              </div>
+            </Link>
+          ))}
         </div>
+      </div>
     </div>
-
-  )
-}
-
-export default AllHotel
+  );
+};
+export default AllHotel;

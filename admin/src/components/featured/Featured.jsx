@@ -13,7 +13,7 @@ const Featured = () => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "USD",
+      currency: "NRs",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
@@ -22,9 +22,9 @@ const Featured = () => {
   // Format large numbers (12.4k format)
   const formatShortNumber = (num) => {
     if (num >= 1000) {
-      return `$${(num / 1000).toFixed(1)}k`;
+      return `Rs.${(num / 1000).toFixed(1)}k`;
     }
-    return `$${num}`;
+    return `Rs.${num}`;
   };
 
   if (loading) {
