@@ -15,17 +15,16 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState("");
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    // Clear error when user starts typing
     if (error) setError(null);
   };
 
   const validateForm = () => {
-    // Check empty fields
     if (
       !credentials.username ||
       !credentials.email ||
@@ -37,18 +36,15 @@ const Register = () => {
       return "Please fill in all fields";
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(credentials.email)) {
       return "Please enter a valid email address";
     }
 
-    // Validate password length
     if (credentials.password.length < 6) {
       return "Password must be at least 6 characters long";
     }
 
-    // Validate phone (basic check for numbers)
     const phoneRegex = /^[0-9+\-\s()]+$/;
     if (!phoneRegex.test(credentials.phone)) {
       return "Please enter a valid phone number";
@@ -61,7 +57,6 @@ const Register = () => {
     e.preventDefault();
     setError(null);
 
-    // Validate form
     const validationError = validateForm();
     if (validationError) {
       setError(validationError);
@@ -71,16 +66,13 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await axios.post("/api/auth/register", credentials);
+      const response = await axios.post("/api/auth/register", credentials);
       setSuccess(true);
-      // Redirect to login after 2 seconds
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
+      setRegisteredEmail(credentials.email);
+      setLoading(false);
     } catch (err) {
       setLoading(false);
 
-      // Handle specific error cases
       const errorMessage = err.response?.data?.message || err.message;
 
       if (
@@ -103,6 +95,35 @@ const Register = () => {
       }
     }
   };
+
+  if (success) {
+    return (
+      <div className="register">
+        <div className="rContainer">
+          <div className="rSuccessMessage">
+            <div className="rSuccessIcon">✓</div>
+            <h2>Registration Successful!</h2>
+            <p>
+              We've sent a verification email to{" "}
+              <strong>{registeredEmail}</strong>
+            </p>
+            <p className="rVerifyInstructions">
+              Please check your email and click the verification link to
+              activate your account.
+            </p>
+            <div className="rSuccessActions">
+              <Link to="/login" className="rButton">
+                Go to Login
+              </Link>
+              <Link to="/resend-verification" className="rLinkButton">
+                Didn't receive email?
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="register">
@@ -174,11 +195,6 @@ const Register = () => {
         </button>
 
         {error && <span className="rError">{error}</span>}
-        {success && (
-          <span className="rSuccess">
-            Registration successful! Redirecting to login...
-          </span>
-        )}
 
         <div className="rFooter">
           Already have an account? <Link to="/login">Login here</Link>

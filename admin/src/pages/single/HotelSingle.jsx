@@ -215,7 +215,7 @@ const HotelSingle = () => {
               <div className="statContent">
                 <div className="statLabel">Cheapest Price</div>
                 <div className="statValue">
-                  ${data.cheapestPrice?.toLocaleString() || "N/A"}
+                  Rs.{data.cheapestPrice?.toLocaleString() || "N/A"}
                 </div>
               </div>
             </div>

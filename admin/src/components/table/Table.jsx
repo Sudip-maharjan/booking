@@ -60,7 +60,7 @@ const List = () => {
                   {format(new Date(booking.checkOutDate), "MMM dd, yyyy")}
                 </TableCell>
                 <TableCell className="tableCell">
-                  ${booking.totalPrice}
+                  Rs.{booking.totalPrice}
                 </TableCell>
                 <TableCell className="tableCell">
                   {booking.paymentMethod}

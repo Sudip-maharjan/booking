@@ -137,7 +137,7 @@ const Reserve = ({ setOpen, hotelId }) => {
               <div className="rMax">
                 Max people: <b>{item.maxPeople}</b>
               </div>
-              <div className="rPrice">${item.price} per night</div>
+              <div className="rPrice">Rs.{item.price} per night</div>
             </div>
             <div className="rSelectRooms">
               {item.roomNumbers.map((roomNumber) => (
@@ -156,7 +156,7 @@ const Reserve = ({ setOpen, hotelId }) => {
         ))}
         {selectedRooms.length > 0 && (
           <div className="rTotal">
-            <span>Total Price: ${calculateTotalPrice()}</span>
+            <span>Total Price: Rs.{calculateTotalPrice()}</span>
             <span className="rNights">({alldates.length} nights)</span>
           </div>
         )}

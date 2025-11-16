@@ -248,7 +248,7 @@ const MyBookings = () => {
                   </div>
                   <div className="totalPrice">
                     <span>Total:</span>
-                    <span className="price">${booking.totalPrice}</span>
+                    <span className="price">Rs.{booking.totalPrice}</span>
                   </div>
                 </div>
 

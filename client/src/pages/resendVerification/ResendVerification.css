@@ -1,0 +1,112 @@
+.resendVerification {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.rvContainer {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    width: 90%;
+}
+
+.rvContainer h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.rvDescription {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.rvContainer form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.rvInput {
+    height: 50px;
+    padding: 0 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.rvInput:focus {
+    outline: none;
+    border-color: #003580;
+}
+
+.rvButton {
+    height: 50px;
+    background-color: #003580;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.rvButton:hover:not(:disabled) {
+    background-color: #002557;
+}
+
+.rvButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.rvError {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-align: center;
+    border: 1px solid #f5c6cb;
+}
+
+.rvSuccess {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-align: center;
+    border: 1px solid #c3e6cb;
+}
+
+.rvFooter {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666;
+}
+
+.rvFooter a {
+    color: #003580;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.rvFooter a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .rvContainer {
+        padding: 30px 20px;
+    }
+}

@@ -1,0 +1,132 @@
+.verifyEmail {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.veContainer {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.veVerifying,
+.veSuccess,
+.veError {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.veIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.veIcon.success {
+    background-color: #d4edda;
+    color: #28a745;
+}
+
+.veIcon.error {
+    background-color: #f8d7da;
+    color: #dc3545;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #003580;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.veContainer h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.veContainer p {
+    margin: 10px 0;
+    color: #666;
+    font-size: 16px;
+}
+
+.veRedirect {
+    color: #999;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.veButton {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #003580;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.veButton:hover {
+    background-color: #002557;
+}
+
+.veButton.secondary {
+    background-color: #6c757d;
+    margin-left: 10px;
+}
+
+.veButton.secondary:hover {
+    background-color: #5a6268;
+}
+
+.veActions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .veContainer {
+        padding: 30px 20px;
+    }
+
+    .veContainer h2 {
+        font-size: 20px;
+    }
+
+    .veButton {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+}
