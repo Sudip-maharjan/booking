@@ -31,9 +31,6 @@ mongoose.connection.on("disconnected", () =>
 //middleware
 app.use(cors());
 app.use(cookieParser());
-
-app.use("/api/payment/webhook", express.raw({ type: "application/json" }));
-
 app.use(express.json());
 
 app.use("/api/auth", authRoute);

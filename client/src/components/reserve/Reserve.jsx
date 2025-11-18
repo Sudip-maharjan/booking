@@ -8,9 +8,15 @@ import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Payment from "../payment/Payment";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
+  const [showPayment, setShowPayment] = useState(false);
+  const [bookingId, setBookingId] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState("card"); // "card" or "payAtHotel"
+
   const { data, loading, error } = useFetch(`/api/hotels/room/${hotelId}`);
   const { dates, options } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
@@ -86,21 +92,24 @@ const Reserve = ({ setOpen, hotelId }) => {
         });
       });
 
-      // Create booking
+      const calculatedPrice = calculateTotalPrice();
+
+      // Create booking based on payment method
       const bookingData = {
         user: user._id,
         hotel: hotelId,
         room: roomDetails,
         checkInDate: dates[0].startDate,
         checkOutDate: dates[0].endDate,
-        totalPrice: calculateTotalPrice(),
+        totalPrice: calculatedPrice,
         guests: options.adult + options.children || 1,
-        paymentMethod: "Pay At Hotel",
-        status: "confirmed",
+        paymentMethod:
+          paymentMethod === "card" ? "Credit Card" : "Pay At Hotel",
+        status: paymentMethod === "card" ? "pending" : "confirmed",
         isPaid: false,
       };
 
-      await axios.post("/api/bookings", bookingData);
+      const response = await axios.post("/api/bookings", bookingData);
 
       // Update room availability
       await Promise.all(
@@ -111,14 +120,58 @@ const Reserve = ({ setOpen, hotelId }) => {
         })
       );
 
-      alert("Booking successful!");
-      setOpen(false);
-      navigate("/my-bookings");
+      // If paying by card, show payment modal
+      if (paymentMethod === "card") {
+        setBookingId(response.data._id);
+        setTotalPrice(calculatedPrice);
+        setShowPayment(true);
+      } else {
+        // If paying at hotel, booking is confirmed immediately
+        alert("Booking successful! You can pay at the hotel.");
+        setOpen(false);
+        navigate("/my-bookings");
+      }
     } catch (err) {
       console.error(err);
       alert("Booking failed. Please try again.");
     }
   };
+
+  const handlePaymentSuccess = () => {
+    alert("Payment successful! Your booking is confirmed.");
+    setOpen(false);
+    setShowPayment(false);
+    navigate("/my-bookings");
+  };
+
+  const handlePaymentCancel = () => {
+    setShowPayment(false);
+    // Optionally cancel the booking if payment is not completed
+    if (bookingId) {
+      axios
+        .put(`/api/bookings/${bookingId}/cancel`)
+        .then(() => {
+          alert("Booking cancelled. Please try again.");
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  // If payment modal is shown, display it
+  if (showPayment) {
+    return (
+      <div className="reserve">
+        <div className="rContainer">
+          <Payment
+            bookingId={bookingId}
+            totalPrice={totalPrice}
+            onSuccess={handlePaymentSuccess}
+            onCancel={handlePaymentCancel}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="reserve">
@@ -160,8 +213,38 @@ const Reserve = ({ setOpen, hotelId }) => {
             <span className="rNights">({alldates.length} nights)</span>
           </div>
         )}
+
+        {/* Payment Method Selection */}
+        {selectedRooms.length > 0 && (
+          <div className="rPaymentMethod">
+            <span className="rPaymentTitle">Payment Method:</span>
+            <div className="rPaymentOptions">
+              <label className="rPaymentOption">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="card"
+                  checked={paymentMethod === "card"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <span>Pay with Card (Online Payment)</span>
+              </label>
+              <label className="rPaymentOption">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="payAtHotel"
+                  checked={paymentMethod === "payAtHotel"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <span>Pay at Hotel</span>
+              </label>
+            </div>
+          </div>
+        )}
+
         <button onClick={handleClick} className="rButton">
-          Reserve Now!
+          {paymentMethod === "card" ? "Proceed to Payment" : "Reserve Now!"}
         </button>
       </div>
     </div>
