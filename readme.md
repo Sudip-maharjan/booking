@@ -101,3 +101,27 @@ cd admin && npm install && npm run dev
 | ![Recommendations](./client/assets/afterbookingrecommendations.png) |
 
 ---
+
+## Admin Screenshots
+
+| Login                                   | Dashboard1                                      |
+| --------------------------------------- | ----------------------------------------------- |
+| ![Login](./admin/assets/adminLogin.png) | ![Home Page](./admin/assets/adminDashboard.png) |
+
+| Admin Profile                                     |
+| ------------------------------------------------- |
+| ![Admin Profile](./admin/assets/adminProfile.png) |
+
+| Users                                     | Hotels                                      |
+| ----------------------------------------- | ------------------------------------------- |
+| ![Manage Users](./admin/assets/users.png) | ![Manage Hotels](./admin/assets/hotels.png) |
+
+| Rooms                                     | Bookings                                        |
+| ----------------------------------------- | ----------------------------------------------- |
+| ![Manage Rooms](./admin/assets/rooms.png) | ![Manage Bookings](./admin/assets/bookings.png) |
+
+| Dashboard2                                 | Dark Mode                                 |
+| ------------------------------------------ | ----------------------------------------- |
+| ![Dashboard 2](./admin/assets/revenue.png) | ![Dark Mode](./admin/assets/darkmode.png) |
+
+---
