@@ -103,8 +103,6 @@ STRIPE_PUBLISHABLE_KEY=pk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...          # Optional, needed for webhook validation
 ```
 
-> ⚠️ Never commit your `.env` file. Make sure it's listed in `.gitignore`.
-
 ---
 
 ## Authentication
