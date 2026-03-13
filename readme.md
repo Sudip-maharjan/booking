@@ -17,7 +17,7 @@ hotel-booking/
 
 | Folder    | README                                 |
 | --------- | -------------------------------------- |
-| 📡 API    | [api/README.md](./api/README.md)       |
+| 📡 API    | [api/README.md](./api/Readme.md)       |
 | 🌐 Client | [client/README.md](./client/README.md) |
 | 🛠️ Admin  | [admin/README.md](./admin/README.md)   |
 
