@@ -1,6 +1,25 @@
 # Hotel Booking Client
 
-The frontend for the Hotel Booking platform built with React 19 and Vite.
+The frontend for the Hotel Booking platform built with React 19 and Vite. The landing page with popular recommendations is shown if the user hasn't logged in or has logged in for the first time. After a user books a hotel, stays there, and submits a rating, the system begins building a user–ratings profile based on all hotel reviews. It then calculates similarity between users using Pearson Correlation and predicts ratings for hotels the user has not yet reviewed. Based on these predictions, the homepage dynamically displays personalized hotel recommendations tailored to the user's preferences.
+
+---
+
+## Recommendation Flow
+
+| Condition                                    | Behaviour                                                 |
+| -------------------------------------------- | --------------------------------------------------------- |
+| Not logged in / First login / No ratings yet | Shows popular hotels (rating ≥ 4, sorted by review count) |
+| Logged in + has rated at least one hotel     | Shows personalized recommendations                        |
+
+**Personalized flow:**
+
+```
+User logs in → Books a hotel → Stays → Rates the hotel
+  → System builds user-ratings map from all reviews
+  → Calculates Pearson Correlation with other users
+  → Predicts ratings for unrated hotels
+  → Shows personalized recommendations on Home page
+```
 
 ---
 
@@ -161,5 +180,3 @@ server: {
   },
 },
 ```
-
----

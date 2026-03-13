@@ -79,3 +79,25 @@ cd admin && npm install && npm run dev
 ```
 
 > See each folder's README for full setup instructions and environment variables.
+
+---
+
+## Client Screenshots
+
+| Home Page                                     | Login                                      |
+| --------------------------------------------- | ------------------------------------------ |
+| ![Home Page](./client./assets/clientHome.png) | ![Login](./client./assets/clientlogin.png) |
+
+| Single Hotel                                      | Reserve                                       |
+| ------------------------------------------------- | --------------------------------------------- |
+| ![Single Hotel](./client./assets/singleHotel.png) | ![Reserve](./client./assets/hotelReserve.png) |
+
+| Rating                                       | My Bookings                                         |
+| -------------------------------------------- | --------------------------------------------------- |
+| ![Rating](./client./assets/clientRating.png) | ![My Bookings](./client./assets/clientBookings.png) |
+
+| Personalized Recommendations After Booking & Rating                  |
+| -------------------------------------------------------------------- |
+| ![Recommendations](./client./assets/afterbookingrecommendations.png) |
+
+---
