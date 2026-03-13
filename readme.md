@@ -84,20 +84,20 @@ cd admin && npm install && npm run dev
 
 ## Client Screenshots
 
-| Home Page                                     | Login                                      |
-| --------------------------------------------- | ------------------------------------------ |
-| ![Home Page](./client./assets/clientHome.png) | ![Login](./client./assets/clientlogin.png) |
+| Home Page                                    | Login                                     |
+| -------------------------------------------- | ----------------------------------------- |
+| ![Home Page](./client/assets/clientHome.png) | ![Login](./client/assets/clientlogin.png) |
 
-| Single Hotel                                      | Reserve                                       |
-| ------------------------------------------------- | --------------------------------------------- |
-| ![Single Hotel](./client./assets/singleHotel.png) | ![Reserve](./client./assets/hotelReserve.png) |
+| Single Hotel                                     | Reserve                                      |
+| ------------------------------------------------ | -------------------------------------------- |
+| ![Single Hotel](./client/assets/singleHotel.png) | ![Reserve](./client/assets/hotelReserve.png) |
 
-| Rating                                       | My Bookings                                         |
-| -------------------------------------------- | --------------------------------------------------- |
-| ![Rating](./client./assets/clientRating.png) | ![My Bookings](./client./assets/clientBookings.png) |
+| Rating                                      | My Bookings                                        |
+| ------------------------------------------- | -------------------------------------------------- |
+| ![Rating](./client/assets/clientRating.png) | ![My Bookings](./client/assets/clientBookings.png) |
 
-| Personalized Recommendations After Booking & Rating                  |
-| -------------------------------------------------------------------- |
-| ![Recommendations](./client./assets/afterbookingrecommendations.png) |
+| Personalized Recommendations After Booking & Rating                 |
+| ------------------------------------------------------------------- |
+| ![Recommendations](./client/assets/afterbookingrecommendations.png) |
 
 ---
