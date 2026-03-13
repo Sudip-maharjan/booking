@@ -86,11 +86,11 @@ cd admin && npm install && npm run dev
 
 | Home Page                                    | Login                                     |
 | -------------------------------------------- | ----------------------------------------- |
-| ![Home Page](./client/assets/clientHome.png) | ![Login](./client/assets/clientlogin.png) |
+| ![Home Page](./client/assets/clientHome.png) | ![Login](./client/assets/clientLogin.png) |
 
 | Single Hotel                                     | Reserve                                      |
 | ------------------------------------------------ | -------------------------------------------- |
-| ![Single Hotel](./client/assets/singleHotel.png) | ![Reserve](./client/assets/hotelReserve.png) |
+| ![Single Hotel](./client/assets/singleHotel.png) | ![Reserve](./client/assets/hotelReserce.png) |
 
 | Rating                                      | My Bookings                                        |
 | ------------------------------------------- | -------------------------------------------------- |
