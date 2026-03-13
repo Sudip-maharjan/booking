@@ -1,136 +1,165 @@
-# Client
+# Hotel Booking Client
 
-Project Tree:
-client
-├── eslint.config.js
-├── index.html
-├── package-lock.json
-├── package.json
-├── public/
-├── README.md
-├── src/
-│ ├── App.jsx
-│ ├── components/
-│ │ ├── featured/
-│ │ │ ├── featured.css
-│ │ │ └── Featured.jsx
-│ │ ├── featuredProperties/
-│ │ │ ├── featuredProperties.css
-│ │ │ └── FeaturedProperties.jsx
-│ │ ├── footer/
-│ │ │ ├── footer.css
-│ │ │ └── Footer.jsx
-│ │ ├── header/
-│ │ │ ├── header.css
-│ │ │ └── Header.jsx
-│ │ ├── mailList/
-│ │ │ ├── mailList.css
-│ │ │ └── MailList.jsx
-│ │ ├── navbar/
-│ │ │ ├── navbar.css
-│ │ │ └── Navbar.jsx
-│ │ ├── propertyList/
-│ │ │ ├── propertyList.css
-│ │ │ └── PropertyList.jsx
-│ │ ├── reserve/
-│ │ │ ├── reserve.css
-│ │ │ └── Reserve.jsx
-│ │ └── searchItem/
-│ │ ├── searchItem.css
-│ │ └── SearchItem.jsx
-│ ├── context/
-│ │ ├── AuthContext.jsx
-│ │ └── SearchContext.jsx
-│ ├── hooks/
-│ │ └── useFetch.js
-│ ├── index.css
-│ ├── main.jsx
-│ └── pages/
-│ ├── Home/
-│ │ ├── home.css
-│ │ └── Home.jsx
-│ ├── hotel/
-│ │ ├── hotel.css
-│ │ └── Hotel.jsx
-│ ├── list/
-│ │ ├── list.css
-│ │ └── List.jsx
-│ └── login/
-│ ├── Login.css
-│ └── Login.jsx
-├── vite.config.js
-└── yarn.lock
-
-##.env
-MONGO = mongodb+srv://Sudip:P6!TbK3ivmqHivF@rajankodb.bebnhew.mongodb.net/booking?retryWrites=true&w=majority&appName=RajanKoDB
-JWT = Sw3UEPh0/lDCttqLlfQUJKSzIXUHLaqLNyTVhSeY8kY=
-
-###
-
-```pwsh
-git add .
-git commit -m "msg"
-git push
-```
-
-## Libraries
-
-- [FontAwesome](https://fontawesome.com/)
-- [react-date-range](https://github.com/hypeserver/react-date-range)
-- [date-fns](https://date-fns.org/)
-- [mongoose](https://mongoosejs.com/)
-  -bcryptjs for password encryption
+The frontend for the Hotel Booking platform built with React 19 and Vite.
 
 ---
 
-## Installation
+## Tech Stack
 
-```pwsh
-npm install --save react-date-range
-npm install --save date-fns
+- **Framework:** React 19
+- **Build Tool:** Vite 7
+- **Routing:** React Router DOM v7
+- **HTTP Client:** Axios
+- **Payments:** Stripe (`@stripe/react-stripe-js`)
+- **Date Picker:** react-date-range + date-fns
+- **Icons:** FontAwesome + react-icons
 
-npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/fontawesome-svg-core
+---
+
+## Project Structure
+
+```
+client/
+├── src/
+│   ├── components/
+│   │   ├── featured/           # Featured cities section
+│   │   ├── featuredProperties/ # Featured hotel cards
+│   │   ├── footer/             # Footer
+│   │   ├── header/             # Search header with date picker
+│   │   ├── mailList/           # Newsletter subscription
+│   │   ├── navbar/             # Top navigation bar
+│   │   ├── payment/            # Stripe payment form
+│   │   ├── propertyList/       # Property type browse section
+│   │   ├── recommended/        # Personalized recommendations
+│   │   ├── reserve/            # Room reservation modal
+│   │   └── searchItem/         # Hotel card in search results
+│   ├── context/
+│   │   ├── AuthContext.jsx     # Auth state (user, login, logout)
+│   │   └── SearchContext.jsx   # Search state (city, dates, options)
+│   ├── hooks/
+│   │   └── useFetch.js         # Generic data fetching hook
+│   ├── pages/
+│   │   ├── Home/               # Landing page
+│   │   ├── list/               # Search results with filters
+│   │   ├── listHotels/         # All hotels browse page
+│   │   ├── hotelDetails/       # Hotel detail + booking
+│   │   ├── login/              # Login page
+│   │   ├── register/           # Register page
+│   │   ├── myBookings/         # User's booking history
+│   │   ├── userProfile/        # User profile
+│   │   ├── verifyEmail/        # Email verification handler
+│   │   └── resendVerification/ # Resend verification email
+│   ├── App.jsx                 # Routes
+│   └── main.jsx                # Entry point
+└── vite.config.js
 ```
 
-## Imports
+---
 
-```jsx
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
-import { DateRange } from "react-date-range";
+## Getting Started
+
+### Prerequisites
+
+- Node.js v18+
+- API server running on port 8800 (see `api/README.md`)
+
+### Installation
+
+```bash
+# 1. Navigate to the client folder
+cd client
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
 ```
 
-### Example code
+The app runs at `http://localhost:5173`. API requests to `/api/*` are proxied to `http://localhost:8800`.
 
-```jsx
-const Example = () => {
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
+---
+
+## Scripts
+
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
+| `npm run preview` | Preview production build |
+| `npm run lint`    | Run ESLint               |
+
+---
+
+## Pages & Routes
+
+| Route                  | Component            | Description                                                        |
+| ---------------------- | -------------------- | ------------------------------------------------------------------ |
+| `/`                    | `Home`               | Landing page with recommendations, featured cities, property types |
+| `/hotels`              | `List`               | Search results with destination, date, and price filters           |
+| `/allhotels`           | `AllHotel`           | Browse all hotels                                                  |
+| `/hotels/:id`          | `Hotel`              | Hotel detail page with photo gallery and booking                   |
+| `/login`               | `Login`              | Login form                                                         |
+| `/register`            | `Register`           | Registration form                                                  |
+| `/my-bookings`         | `MyBookings`         | Authenticated user's booking history                               |
+| `/verify-email/:token` | `VerifyEmail`        | Handles email verification link                                    |
+| `/resend-verification` | `ResendVerification` | Request a new verification email                                   |
+
+---
+
+## State Management
+
+State is managed via React Context + `useReducer`. No external state library is used.
+
+### AuthContext
+
+Persists user session to `localStorage`. Exposes `user`, `loading`, `error`, and `dispatch`.
+
+| Action          | Description         |
+| --------------- | ------------------- |
+| `LOGIN_START`   | Sets loading state  |
+| `LOGIN_SUCCESS` | Stores user payload |
+| `LOGIN_FAILURE` | Stores error        |
+| `LOGOUT`        | Clears user         |
+
+### SearchContext
+
+Holds the active search query across pages. Exposes `city`, `dates`, `options`, and `dispatch`.
+
+| Action         | Description             |
+| -------------- | ----------------------- |
+| `NEW_SEARCH`   | Sets new search payload |
+| `RESET_SEARCH` | Resets to initial state |
+
+---
+
+## useFetch Hook
+
+A generic data fetching hook wrapping Axios. Refetching is supported for search results.
+
+```js
+const { data, loading, error, reFetch } = useFetch(
+  "/api/hotels?city=Kathmandu",
+);
+```
+
+---
+
+## API Proxy
+
+Vite is configured to proxy all `/api` requests to the backend, so no CORS issues in development:
+
+```js
+// vite.config.js
+server: {
+  proxy: {
+    "/api": {
+      target: "http://localhost:8800",
+      changeOrigin: true,
+      secure: false,
     },
-  ]);
-
-  return (
-    <DateRange
-      editableDateInputs={true}
-      onChange={(item) => setState([item.selection])}
-      moveRangeOnFirstSelection={false}
-      ranges={state}
-    />
-  );
-};
-
-export default Example;
+  },
+},
 ```
 
-### in date-fns mm means minutes and MM means month
-
-# mongodb
-
-Rajak KO DB
-username: Sudip
-pass: P6!TbK3ivmqHivF
-
-### url: "mongodb+srv://<db_username>:<db_password>@rajankodb.bebnhew.mongodb.net/?retryWrites=true&w=majority&appName=RajanKoDB"
+---
