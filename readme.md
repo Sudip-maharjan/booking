@@ -1,6 +1,6 @@
 # Hotel Booking App
 
-## A full-stack hotel booking platform that allows users to search hotels, book rooms, make payments, and manage bookings. It also includes an admin dashboard for managing users, hotels, rooms, and bookings. The project is built with the MERN stack and integrates Stripe payments, email verification, and a <ins>recommendation engine</ins>.
+A full-stack hotel booking platform that allows users to search hotels, book rooms, make payments, and manage bookings. It also includes an admin dashboard for managing users, hotels, rooms, and bookings. The project is built with the MERN stack and integrates Stripe payments, email verification, and a <ins>recommendation engine</ins>.
 
 ## Project Structure
 
